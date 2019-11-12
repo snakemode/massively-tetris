@@ -1,10 +1,7 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "hello-typescript",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "A simple Node app built on Express and typescript, instantly up and running.",
   "main": "server.js",
   "scripts": {
     "start": "ts-node server.ts",
@@ -14,8 +11,6 @@
   "dependencies": {
     "express": "^4.16.4",
     "@types/node": "~7.0.18",
-    "jest": "^24.9.0",
-    "nodemon": "^1.19.4",
     "ts-node": "~3.1.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.0.3"    
