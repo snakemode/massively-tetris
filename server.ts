@@ -5,6 +5,11 @@
 const express = require("express");
 const app = express();
 
+const someClass = require("someClass");
+
+const instance = new someClass("abc");
+instance.print();
+
 // we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
