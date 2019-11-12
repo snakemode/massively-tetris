@@ -1,5 +1,7 @@
-export default class SomeClass {
+export class SomeClass {
+  
   private _something: string;
+  
   constructor(something: string) {
     this._something = something;
   }
