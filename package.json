@@ -4,15 +4,20 @@
   "description": "A simple Node app built on Express and typescript, instantly up and running.",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node server.ts",
-    "test": "jest"
+    "start": "npm run buildclient && ts-node server.ts",
+     "buildclient": "webpack",
+     "test": "jest"
   },
   "dependencies": {
     "express": "latest",
     "@types/node": "latest",
     "ts-node": "latest",
     "tsconfig-paths": "latest",
-    "typescript": "latest"    
+    "typescript": "latest",
+    "ts-loader": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "jest-cli": "latest" 
   },
   "engines": {
     "node": "12.x"
