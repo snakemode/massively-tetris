@@ -1,15 +1,12 @@
 import { SomeClass } from "./someClass";
 
-
 const express = require("express");
-cons
+const path = require("path");
 const app = express();
 
 const instance = new SomeClass("abc");
 instance.print();
 
-
-//app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.get("/", (request, response)  => {
   console.log(__dirname);

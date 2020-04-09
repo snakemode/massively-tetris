@@ -95,7 +95,7 @@ var train =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nconsole.log(\"Hello from client side TypeScript\");\n\n\n//# sourceURL=webpack://train/./src/public-src/client.ts?");
+eval("\nconsole.log(\"Hello from client side TypeScript\");\nvar ThisIsAClass = /** @class */ (function () {\n    function ThisIsAClass(thatTakesATypedParameter) {\n        this.Param = thatTakesATypedParameter;\n    }\n    return ThisIsAClass;\n}());\nvar instance = new ThisIsAClass(\"hi\");\nconsole.log(instance.Param);\n\n\n//# sourceURL=webpack://train/./src/public-src/client.ts?");
 
 /***/ })
 
