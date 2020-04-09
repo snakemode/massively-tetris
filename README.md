@@ -8,7 +8,7 @@ Your Project
 ------------
 
 On the front-end,
-- edit `src/public-src/client.js`, `public/style.css` and `views/index.html`
+- edit `src/public-src/client.js`, `src/public/style.css` and `src/views/index.html`
 - drag in `assets`, like images or music, to add them to your project
 
 On the back-end,
