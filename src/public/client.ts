@@ -4,7 +4,6 @@ console.log("Hello from client side TypeScript");
 
 const instance = new ACoolClass("hi");
 
-
 const logToConsole = (ourClass: ACoolClass) => {
   console.log(ourClass.Param);
 }

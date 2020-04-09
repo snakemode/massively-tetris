@@ -82,32 +82,32 @@ var train =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/public-src/client.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/public/client.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/public-src/ACoolClass.ts":
-/*!**************************************!*\
-  !*** ./src/public-src/ACoolClass.ts ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass = /** @class */ (function () {\n    function ACoolClass(thatTakesATypedParameter) {\n        this.Param = thatTakesATypedParameter;\n    }\n    return ACoolClass;\n}());\nexports.ACoolClass = ACoolClass;\n\n\n//# sourceURL=webpack://train/./src/public-src/ACoolClass.ts?");
-
-/***/ }),
-
-/***/ "./src/public-src/client.ts":
+/***/ "./src/public/ACoolClass.ts":
 /*!**********************************!*\
-  !*** ./src/public-src/client.ts ***!
+  !*** ./src/public/ACoolClass.ts ***!
   \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass_1 = __webpack_require__(/*! ./ACoolClass */ \"./src/public-src/ACoolClass.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar instance = new ACoolClass_1.ACoolClass(\"hi\");\nvar logToConsole = function (ourClass) {\n    console.log(ourClass.Param);\n};\nlogToConsole(instance); // Works fine\n// logToConsole(\"something else\"); // Fails at compile time!\n\n\n//# sourceURL=webpack://train/./src/public-src/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass = /** @class */ (function () {\n    function ACoolClass(thatTakesATypedParameter) {\n        this.Param = thatTakesATypedParameter;\n    }\n    return ACoolClass;\n}());\nexports.ACoolClass = ACoolClass;\n\n\n//# sourceURL=webpack://train/./src/public/ACoolClass.ts?");
+
+/***/ }),
+
+/***/ "./src/public/client.ts":
+/*!******************************!*\
+  !*** ./src/public/client.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass_1 = __webpack_require__(/*! ./ACoolClass */ \"./src/public/ACoolClass.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar instance = new ACoolClass_1.ACoolClass(\"hi\");\nvar logToConsole = function (ourClass) {\n    console.log(ourClass.Param);\n};\nlogToConsole(instance); // Works fine\n// logToConsole(\"something else\"); // Fails at compile time!\n\n\n//# sourceURL=webpack://train/./src/public/client.ts?");
 
 /***/ })
 

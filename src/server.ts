@@ -7,7 +7,7 @@ const app = express();
 const instance = new SomeClass("abc");
 instance.print();
 
-app.use(express.static(path.join(__dirname, "/dist")));
+app.use(express.static(path.join(__dirname, "/dist"))); // TypeScript output compiled to here.
 app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/", (request, response)  => {
