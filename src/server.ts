@@ -9,7 +9,6 @@ instance.print();
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.get("/", (request, response)  => {
-  console.log(__dirname);
   response.sendFile(__dirname + "/views/index.html");
 });
 
