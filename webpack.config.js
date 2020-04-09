@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: 'client.js',
     path: path.resolve(__dirname, 'src/dist'),    
-    library: 'train',
+    library: 'lib',
     libraryTarget: 'var'
   }
 };

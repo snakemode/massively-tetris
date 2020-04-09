@@ -1,4 +1,4 @@
-var train =
+var lib =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -95,7 +95,7 @@ var train =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass = /** @class */ (function () {\n    function ACoolClass(thatTakesATypedParameter) {\n        this.Param = thatTakesATypedParameter;\n    }\n    return ACoolClass;\n}());\nexports.ACoolClass = ACoolClass;\n\n\n//# sourceURL=webpack://train/./src/public/ACoolClass.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass = /** @class */ (function () {\n    function ACoolClass(thatTakesATypedParameter) {\n        this.Param = thatTakesATypedParameter;\n    }\n    return ACoolClass;\n}());\nexports.ACoolClass = ACoolClass;\n\n\n//# sourceURL=webpack://lib/./src/public/ACoolClass.ts?");
 
 /***/ }),
 
@@ -107,7 +107,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar AC
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass_1 = __webpack_require__(/*! ./ACoolClass */ \"./src/public/ACoolClass.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar instance = new ACoolClass_1.ACoolClass(\"hi\");\nvar logToConsole = function (ourClass) {\n    console.log(ourClass.Param);\n};\nlogToConsole(instance); // Works fine\n// logToConsole(\"something else\"); // Fails at compile time!\n\n\n//# sourceURL=webpack://train/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ACoolClass_1 = __webpack_require__(/*! ./ACoolClass */ \"./src/public/ACoolClass.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar instance = new ACoolClass_1.ACoolClass(\"hi\");\nvar logToConsole = function (ourClass) {\n    console.log(ourClass.Param);\n};\nlogToConsole(instance); // Works fine\n// logToConsole(\"something else\"); // Fails at compile time!\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 
