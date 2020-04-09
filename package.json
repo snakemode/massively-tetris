@@ -2,18 +2,17 @@
   "name": "hello-typescript",
   "version": "0.0.1",
   "description": "A simple Node app built on Express and typescript, instantly up and running.",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "start": "ts-node server.ts",
-    "compile": "tsc",
     "test": "jest"
   },
   "dependencies": {
-    "express": "^4.16.4",
-    "@types/node": "~7.0.18",
-    "ts-node": "~3.1.0",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.0.3"    
+    "express": "latest",
+    "@types/node": "latest",
+    "ts-node": "latest",
+    "tsconfig-paths": "latest",
+    "typescript": "latest"    
   },
   "engines": {
     "node": "12.x"
