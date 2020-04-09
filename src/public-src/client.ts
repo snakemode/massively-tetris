@@ -1,15 +1,14 @@
+import { ACoolClass } from "./ACoolClass";
+
 console.log("Hello from client side TypeScript");
 
-class ThisIsAClass {
-  
-  public Param: string;
-  
-  constructor(thatTakesATypedParameter: string) {
-    this.Param = thatTakesATypedParameter;
-  }
+const instance = new ACoolClass("hi");
+
+
+const logToConsole = (ourClass: ThisIsAClass) => {
+  console.log(ourClass.Param);
 }
 
 
-const instance = new ThisIsAClass("hi");
-
-console.log(instance.Param);
+logToConsole(instance); // Works fine
+// logToConsole("something else"); // Fails at compile time!
