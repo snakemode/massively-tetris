@@ -1,10 +1,10 @@
 {
-  "name": "hello-typescript",
+  "name": "typescript-fullstack",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express and typescript, instantly up and running.",
+  "description": "A server side TypeScript app that uses WebPack to support TypeScript frontends.",
   "main": "server.ts",
   "scripts": {
-    "start": "npm run buildclient && ts-node server.ts",
+    "start": "npm run buildclient && ts-node server/server.ts",
      "buildclient": "webpack",
      "test": "jest"
   },
@@ -29,6 +29,8 @@
   "keywords": [
     "node",
     "glitch",
+    "typescript",
+    "webpack",
     "express"
   ]
 }

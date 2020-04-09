@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: { 
-    index: './src/client.ts'
+    index: './public-src/client.ts'
   },
   module: {
     rules: [
@@ -18,7 +18,7 @@ module.exports = {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
   output: {
-    filename: 'script.js',
+    filename: 'client.js',
     path: path.resolve(__dirname, 'public'),    
     library: 'train',
     libraryTarget: 'var'

@@ -10,6 +10,7 @@ instance.print();
 
 app.use(express.static("public"));
 app.get("/", (request, response)  => {
+  console.log(__dirname);
   response.sendFile(__dirname + "/views/index.html");
 });
 
