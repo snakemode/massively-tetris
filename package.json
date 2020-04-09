@@ -4,9 +4,10 @@
   "description": "A server side TypeScript app that uses WebPack to support TypeScript frontends.",
   "main": "server.ts",
   "scripts": {
-    "start": "npm run buildclient && ts-node server/server.ts",
-     "buildclient": "webpack",
-     "test": "jest"
+    "prestart": "npm run buildclient",
+    "start": "ts-node src/server.ts",
+    "buildclient": "webpack",
+    "test": "jest"
   },
   "dependencies": {
     "express": "latest",
