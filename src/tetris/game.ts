@@ -3,3 +3,11 @@ export class Tetris {
     
   }
 }
+
+interface IRotationSystem {
+  
+}
+
+class SuperRotationSystem: IRotationSystem {
+  
+}
