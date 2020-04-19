@@ -1,4 +1,3 @@
-
 import { RotationState } from './RotationState';
 import { RotationOperation } from './RotationOperation';
 
@@ -10,11 +9,13 @@ export class Tetromino {
     public orientation: RotationState;
     public allLayouts: TetronimoLayout[];
     public layout: string[][];
+    public locked: boolean;
 
     private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
         this.allLayouts = allLayouts;
         this.orientation = defaultState;
         this.layout = this.layoutFor(defaultState);
+        this.locked = false;
     }
 
     public rotate(direction: RotationOperation) {
@@ -40,12 +41,16 @@ export class Tetromino {
     }
 
     public static create(shape: ValidTetronimo): Tetromino {
-        var layoutsForShape = layouts[shape];
-        console.log(shape);
-        return new Tetromino(layoutsForShape);
+        return new Tetromino(layouts[shape]);
     }
-
+    
     public static I(): Tetromino { return this.create("I") }
+    public static J(): Tetromino { return this.create("J") }
+    public static L(): Tetromino { return this.create("L") }
+    public static S(): Tetromino { return this.create("S") }
+    public static T(): Tetromino { return this.create("T") }
+    public static Z(): Tetromino { return this.create("Z") }
+    public static O(): Tetromino { return this.create("O") }
 }
 
 const layouts = {

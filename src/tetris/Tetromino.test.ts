@@ -12,16 +12,12 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate Right", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Right);
 
             expect(tetromino.orientation).toBe(RotationState.R);
         });
 
         it("Can rotate right, twice, to the bottom", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
 
@@ -29,8 +25,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate right, three times, to the left", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate( RotationOperation.Right);
@@ -39,16 +33,12 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate Left", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Left);
 
             expect(tetromino.orientation).toBe(RotationState.L);
         });
 
         it("Can rotate Left, twice, to the bottom", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Left);
             tetromino.rotate( RotationOperation.Left);
 
@@ -56,8 +46,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate Left, three times, to the right", () => {
-            var tetromino = Tetromino.I();
-
             tetromino.rotate(RotationOperation.Left);
             tetromino.rotate(RotationOperation.Left);
             tetromino.rotate(RotationOperation.Left);
@@ -68,9 +56,13 @@ describe("Tetromino", () => {
 
     describe("Test tetronimo handles rotation operations correctly.", () => {
         
-        it("Defaults to origin state", () => {
-            var tetromino = Tetromino.create("_");
+        let tetromino: Tetromino;
+        beforeEach(() => {
+            tetromino = Tetromino.create("_");
+        });
 
+
+        it("Defaults to origin state", () => {
             expect(tetromino.layout).toStrictEqual([
                 [ '#', ' ', ' ', ' ' ],
                 [ ' ', ' ', ' ', ' ' ],
@@ -80,8 +72,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate right", () => {
-            var tetromino = Tetromino.create("_");
-
             tetromino.rotate(RotationOperation.Right);
 
             expect(tetromino.layout).toStrictEqual([
@@ -93,8 +83,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate right, right", () => {
-            var tetromino = Tetromino.create("_");
-
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
 
@@ -107,8 +95,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate right, right, right", () => {
-            var tetromino = Tetromino.create("_");
-
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
@@ -122,8 +108,6 @@ describe("Tetromino", () => {
         });
 
         it("Can rotate right, right, right, right", () => {
-            var tetromino = Tetromino.create("_");
-
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
             tetromino.rotate(RotationOperation.Right);
