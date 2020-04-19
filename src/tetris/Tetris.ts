@@ -55,5 +55,21 @@ class World {
       }
     }
   }
+/*
+  public *Rows(): IterableIterator<Row> {    
+    for(let y = 0; y < this.height; y++) {
+      
+      let row: Row = [];
+      
+      for (let x = 0; x < this.width; x++) {
+        
+        const occupied: boolean = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
+        const cell: Cell = { x, y, occupied };
+        row.push({ x, y, occupied });      
+      }
+      
+      yield return row;
+    }
+  }*/
     
 }
