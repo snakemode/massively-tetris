@@ -1,9 +1,16 @@
+import { uuidv4 } from "../util";
+
 export class Tetris {
 
-  public world: World;
+  public worlds: World[];
 
   constructor() {
-    this.world = new World();
+    this.world = World[];
+  }
+
+  public addPlayer() {
+    const newWorld = new World();
+    this.world.push(newWorld);
   }
 
   public start(): void {
