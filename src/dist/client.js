@@ -95,7 +95,7 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Tetris_1 = __webpack_require__(/*! ../tetris/Tetris */ \"./src/tetris/Tetris.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar world = document.getElementById(\"world\");\nfunction renderWorld(game) {\n}\nvar game;\nfunction start() {\n    game = new Tetris_1.Tetris();\n    game.addPlayer();\n    game.start();\n    setInterval(function () {\n        renderWorld(game);\n    }, 33);\n}\nstart();\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Tetris_1 = __webpack_require__(/*! ../tetris/Tetris */ \"./src/tetris/Tetris.ts\");\nvar util_1 = __webpack_require__(/*! ../util */ \"./src/util.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nvar world = document.getElementById(\"world\");\nfunction renderWorld(game) {\n    for (var _i = 0, _a = game.Worlds; _i < _a.length; _i++) {\n        var world_1 = _a[_i];\n    }\n}\nvar game;\nfunction start() {\n    game = new Tetris_1.Tetris();\n    var playerId = util_1.uuidv4();\n    game.addPlayer(playerId);\n    game.start();\n    setInterval(function () {\n        renderWorld(game);\n    }, 33);\n}\nstart();\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ }),
 
@@ -104,9 +104,22 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Te
   !*** ./src/tetris/Tetris.ts ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (5:27)\\nFile was processed with these loaders:\\n * ../rbd/pnpm-volume/29ce44a6-cee4-4678-8d14-d22668a45fa5/node_modules/.registry.npmjs.org/ts-loader/6.2.2/node_modules/ts-loader/index.js\\nYou may need an additional loader to handle the result of these loaders.\\n| var Tetris = /** @class */ (function () {\\n|     function Tetris() {\\n>         this.world = World[];\\n|     }\\n|     Tetris.prototype.addPlayer = function () {\");\n\n//# sourceURL=webpack://lib/./src/tetris/Tetris.ts?");
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Tetris = /** @class */ (function () {\n    function Tetris() {\n        this.Worlds = [];\n    }\n    Tetris.prototype.addPlayer = function (playerId) {\n        var newWorld = new World(playerId);\n        this.Worlds.push(newWorld);\n    };\n    Tetris.prototype.start = function () {\n        setInterval(function (game) {\n            game.tick();\n        }, 1000, this);\n    };\n    Tetris.prototype.tick = function () {\n    };\n    return Tetris;\n}());\nexports.Tetris = Tetris;\nvar World = /** @class */ (function () {\n    function World(playerId, width, height) {\n        if (width === void 0) { width = 10; }\n        if (height === void 0) { height = 22; }\n        this.playerId = playerId;\n        this.width = width;\n        this.height = height;\n    }\n    return World;\n}());\n\n\n//# sourceURL=webpack://lib/./src/tetris/Tetris.ts?");
+
+/***/ }),
+
+/***/ "./src/util.ts":
+/*!*********************!*\
+  !*** ./src/util.ts ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nfunction uuidv4() {\n    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {\n        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);\n        return v.toString(16);\n    });\n}\nexports.uuidv4 = uuidv4;\n\n\n//# sourceURL=webpack://lib/./src/util.ts?");
 
 /***/ })
 

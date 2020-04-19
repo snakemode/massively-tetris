@@ -2,15 +2,15 @@ import { uuidv4 } from "../util";
 
 export class Tetris {
 
-  public worlds: World[];
+  public Worlds: World[];
 
   constructor() {
-    this.world = World[];
+    this.Worlds = [];
   }
 
-  public addPlayer() {
-    const newWorld = new World();
-    this.world.push(newWorld);
+  public addPlayer(playerId: string) {
+    const newWorld = new World(playerId);
+    this.Worlds.push(newWorld);
   }
 
   public start(): void {
@@ -28,10 +28,12 @@ export class Tetris {
 
 class World {
 
+  public playerId: string;
   public width: number;
   public height: number;
 
-  constructor(width: number = 10, height: number = 22) {
+  constructor(playerId: string, width: number = 10, height: number = 22) {
+    this.playerId = playerId;
     this.width = width;
     this.height = height;
   }
