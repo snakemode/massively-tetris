@@ -25,7 +25,8 @@ export class Tetris {
 
 }
 
-type BlockOrNothing = { x: number, y: number, occupied: boolean };
+type Cell = { x: number, y: number, occupied: boolean };
+type Row = Cell[];
 type Location = { x: number, y: number };
 
 class World {
@@ -43,13 +44,13 @@ class World {
     this.occupiedLocations = [];
   }    
 
-  public *Cells(): IterableIterator<BlockOrNothing> {
-    console.log("Hi cells");
+  public *Cells(): IterableIterator<Cell> {
+    
     for(let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         
         const occupied = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
-        const obj: BlockOrNothing = { x, y, occupied };
+        const obj: Cell = { x, y, occupied };
         yield obj;        
       }
     }
