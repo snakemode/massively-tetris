@@ -95,7 +95,19 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nconsole.log(\"Hello from client side TypeScript\");\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Tetris_1 = __webpack_require__(/*! ../tetris/Tetris */ \"./src/tetris/Tetris.ts\");\nconsole.log(\"Hello from client side TypeScript\");\nfunction renderWorld(game) {\n    console.log(\"Rendering\");\n}\nvar game;\nfunction start() {\n    game = new Tetris_1.Tetris();\n    game.start();\n    setInterval(function () {\n        renderWorld(game);\n    }, 33);\n}\nstart();\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+
+/***/ }),
+
+/***/ "./src/tetris/Tetris.ts":
+/*!******************************!*\
+  !*** ./src/tetris/Tetris.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Tetris = /** @class */ (function () {\n    function Tetris() {\n        this.world = new World();\n    }\n    Tetris.prototype.start = function () {\n        setInterval(function (game) {\n            game.tick();\n        }, 1000, this);\n    };\n    Tetris.prototype.tick = function () {\n    };\n    return Tetris;\n}());\nexports.Tetris = Tetris;\nvar World = /** @class */ (function () {\n    function World(width, height) {\n        if (width === void 0) { width = 10; }\n        if (height === void 0) { height = 22; }\n        this.width = width;\n        this.height = height;\n    }\n    return World;\n}());\n\n\n//# sourceURL=webpack://lib/./src/tetris/Tetris.ts?");
 
 /***/ })
 
