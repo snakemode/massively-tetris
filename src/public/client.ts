@@ -8,10 +8,15 @@ const world: HTMLElement | null = document.getElementById("world");
 function renderWorld(game: Tetris) {
     for(const world of game.Worlds) {
       
+      for(const cell of world.Cells()) {
+        //console.log(cell);
+      }
+      
     }
 }
 
 let game: Tetris;
+
 function start() {
     game = new Tetris();
     const playerId = uuidv4();
