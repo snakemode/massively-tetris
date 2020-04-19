@@ -55,7 +55,7 @@ class World {
       }
     }
   }
-/*
+
   public *Rows(): IterableIterator<Row> {    
     for(let y = 0; y < this.height; y++) {
       
@@ -70,6 +70,6 @@ class World {
       
       yield return row;
     }
-  }*/
+  }
     
 }
