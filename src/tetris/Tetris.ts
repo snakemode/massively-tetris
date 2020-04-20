@@ -45,30 +45,23 @@ class World {
   }    
 
   public *Cells(): IterableIterator<Cell> {
-    
-    for(let y = 0; y < this.height; y++) {
-      for (let x = 0; x < this.width; x++) {
-        
-        const occupied = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
-        const obj: Cell = { x, y, occupied };
-        yield obj;        
-      }
+    for (let row of this.Rows()) {
+      for (let cell of row) {
+        yield cell;
+      }    
     }
   }
 
   public *Rows(): IterableIterator<Row> {    
-    for(let y = 0; y < this.height; y++) {
-      
-      let row: Row = [];
+    for (let y = 0; y < this.height; y++) {
+      const row: Row = [];
       
       for (let x = 0; x < this.width; x++) {
-        
         const occupied: boolean = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
-        const cell: Cell = { x, y, occupied };
         row.push({ x, y, occupied });      
       }
       
-      yield return row;
+      yield row;
     }
   }
     
