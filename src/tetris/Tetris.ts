@@ -9,9 +9,6 @@ export class Tetris {
     this.world = new World("player1");
   }
 
-  public addPlayer(playerId: string) {
-  }
-
   public start(): void {
     setInterval(function(game: Tetris) { 
       game.tick();       

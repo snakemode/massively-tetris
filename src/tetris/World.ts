@@ -16,6 +16,7 @@ export class World {
 
   public rotationSystem: IRotationSystem;
   public gameOver: boolean = false;
+  public score: number = 0;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
     this.rotationSystem = new SuperRotationSystem(this);
@@ -127,7 +128,7 @@ export class World {
     const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
       
     if (!gameOverCheck.canMove) {
-      console.log("❌ Game over!");
+      console.log("❌ Game over! " + this.score);
       this.gameOver = true;
     } 
   }
@@ -149,13 +150,22 @@ export class World {
 
       this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != y);
       this.occupiedLocations = this.occupiedLocations.map(cell => {
-        if(cell.y == rowAbove) {
+        if (cell.y == rowAbove) {
           cell.y = y;
         }
         return cell;
       });
     }
+    
+    switch(completedRows.length) {
+      case 1: this.score += 40;
+      case 2: this.score += 100;
+      case 3: this.score += 300;
+      case 4: this.score += 1200;
+      default: this.score += 0;
+    }
 
+    console.log("Current score", this.score);
   }  
     
 }

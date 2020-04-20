@@ -20,7 +20,7 @@ export function render(game: Tetris) {
       cellIndex++;
       const offsetX = cellIndex * minoSize;
            
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "lightGray";
       ctx.fillRect(offsetX, offsetY, minoSize, minoSize);            
 
       ctx.fillStyle = selectColour(cell);

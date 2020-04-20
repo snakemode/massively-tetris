@@ -34,7 +34,8 @@ const toMove = (key: string): Move => {
     case "a": return { deltaX: -1, deltaY: 0, rotation: RotationOperation.None };
     case "s": return { deltaX: 0, deltaY: -1, rotation: RotationOperation.None };
     case "d": return { deltaX: 1, deltaY: 0, rotation: RotationOperation.None };
-    case "w": return { deltaX: 0, deltaY: 0, rotation: RotationOperation.Right };
+    case "q": return { deltaX: 0, deltaY: 0, rotation: RotationOperation.Left };
+    case "e": return { deltaX: 0, deltaY: 0, rotation: RotationOperation.Right };
     default: return { deltaX: 0, deltaY: 0, rotation: RotationOperation.None };
   }    
 }

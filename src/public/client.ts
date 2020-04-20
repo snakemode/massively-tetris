@@ -14,7 +14,6 @@ function start() {
   controls.connect();
 
   const playerId = uuidv4();
-  game.addPlayer(playerId);
   game.start();
 
   setInterval(function() {
