@@ -17,8 +17,10 @@ export class World {
   public tetromino: Tetromino;
 
   public rotationSystem: IRotationSystem;
+  public gameOver: boolean = false;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
+    this.rotationSystem = new SuperRotationSystem(this);
     this.playerId = playerId;
     this.width = width;
     this.height = height;
@@ -27,6 +29,10 @@ export class World {
   }
 
   public tick(): void {
+    if (this.gameOver) {
+      return;
+    }
+    
     if (this.tetromino.shape === "Empty") {
       this.tetromino = Tetromino.random();
       this.tetromino.location = { x: 3, y: this.height + 2 }; 
@@ -34,6 +40,7 @@ export class World {
       const moveCheck = this.canMove({ deltaX: 0, deltaY: -1 });
       if (!moveCheck.canMove) {
         console.log("❌ Game over!");
+        this.gameOver = true;
       }    
     }
         
@@ -51,11 +58,11 @@ export class World {
     if (moveCheck.lock) {
       this.lockTetromino();
       this.tetromino = Tetromino.Empty();
-    }    
+    }
   }
 
   public rotate(direction: RotationOperation) {
-    
+    this.rotationSystem.rotate(direction);
   }
 
   public canMove(move: Move): MoveResult {
@@ -81,7 +88,7 @@ export class World {
     return { canMove: true, lock: false };
   }
   
-  private lockTetromino(): void {
+  public lockTetromino(): void {
     for (const mino of this.tetromino.minos()) {
       this.occupiedLocations.push(mino);
     }   
