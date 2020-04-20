@@ -46,7 +46,7 @@ export class Tetromino
     }
 
     public occupies(worldLocation: Location): boolean {      
-      for (let mino of this.Minos()) {
+      for (let mino of this.minos()) {
         if (mino.x === worldLocation.x && mino.y === worldLocation.y) {
             return true;
         } 
@@ -56,7 +56,7 @@ export class Tetromino
     }
 
     public canMove(move: Move, occupiedLocations: Location[] = []): boolean {
-      for (const mino of this.Minos()) {
+      for (const mino of this.minos()) {
         
         const nextX = mino.x + move.deltaX;
         const nextY = mino.y + move.deltaY;
