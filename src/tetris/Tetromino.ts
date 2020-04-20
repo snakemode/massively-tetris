@@ -55,6 +55,16 @@ export class Tetromino
       return false;
     }
 
+    public minoFor(worldLocation: Location): Mino? {  
+      const allMinos = [...this.minos()];
+      const filtered = allMinos.filter(m => m.x === worldLocation.x && m.y === worldLocation.y);
+
+      if (filtered.length > 0) {
+        return filtered[0];
+      }
+      return null;
+    }
+
     public canMove(move: Move, occupiedLocations: Location[] = []): boolean {
       for (const mino of this.minos()) {
         

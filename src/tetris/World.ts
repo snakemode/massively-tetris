@@ -1,7 +1,7 @@
 import { Location, ValidTetronimo, Move, Mino } from './Types';
 import { Tetromino } from "./Tetromino";
 
-type Cell = { x: number, y: number, occupied: boolean };
+type Cell = { x: number, y: number, mino: Mino? };
 type Row = Cell[];
 
 export class World {
@@ -61,13 +61,15 @@ export class World {
       const row: Row = [];
       
       for (let x = 0; x < this.width; x++) {
-        let occupied: boolean = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
+        let anyMinos: Mino[] = this.occupiedLocations.filter(l => l.x === x && l.y === y);
+        let occupied: boolean = anyMinos.length > 0;
+        let mino = occupied ? occupied[0]: null;
         
         if (this.tetromino != null && this.tetromino.occupies({ x, y })) {
-          occupied = true;
+          mino = this.tetromino.minoFor({ x, y });
         }
         
-        row.push({ x, y, occupied });      
+        row.push({ x, y, mino });      
       }
       
       yield row;

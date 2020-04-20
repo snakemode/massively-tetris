@@ -41,6 +41,6 @@ function selectColour(mino: Mino): string {
     case "S": return "powderBlue";      
     case "T": return "powderBlue";            
     case "Z": return "powderBlue";
-    case default: return "black";
+    default: return "black";
   }
 }
