@@ -32,24 +32,14 @@ export class World {
     }
     
     if (this.tetromino.shape === "Empty") {
-      this.tetromino = Tetromino.random();
-      this.tetromino.location = { x: 3, y: this.height + 2 }; 
-      
-      const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
-      
-      if (!gameOverCheck.canMove) {
-        console.log("❌ Game over!");
-        this.gameOver = true;
-      }    
+      this.spawnNewPiece();      
+      this.checkForGameOver();   
     }
         
     this.move({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
-
-    for (let row in this.rows()) {
-      
-    }
+    this.lineClear();
   }
-  
+
   public move(move: Move) {
     const moveCheck = this.canMove(move);
     
@@ -127,5 +117,45 @@ export class World {
       yield row;
     }
   }
+  
+  private spawnNewPiece() {
+    this.tetromino = Tetromino.random();
+    this.tetromino.location = { x: 3, y: this.height + 2 }; 
+  }
+
+  private checkForGameOver(){
+    const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
+      
+    if (!gameOverCheck.canMove) {
+      console.log("❌ Game over!");
+      this.gameOver = true;
+    } 
+  }
+
+  private lineClear() {
+    let completedRows: Row[] = [];
+
+    for (let row of this.rows()) {
+      if(row.every(cell => cell.occupied)) {
+        completedRows.push(row);
+      }
+    }
+
+    completedRows = completedRows.reverse(); // Bottom first thanks!
+
+    for (let row of completedRows) {
+      const y = row[0].y;
+      const rowAbove = y + 1;
+
+      this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != y);
+      this.occupiedLocations = this.occupiedLocations.map(cell => {
+        if(cell.y == rowAbove) {
+          cell.y = y;
+        }
+        return cell;
+      });
+    }
+
+  }  
     
 }
