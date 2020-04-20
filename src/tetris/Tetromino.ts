@@ -28,6 +28,7 @@ export class Tetromino
         this.location = { x: -1, y: -1 };
     }
 
+
     public rotate(direction: RotationOperation) {
         const rotationMap = [
             RotationState.O,
