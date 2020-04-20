@@ -33,6 +33,11 @@ export class World {
     if (nextLocation > 0) {    
       this.tetromino.location.y = nextLocation;
     } else {
+      
+      for (const mino of this.tetromino.Minos()) {
+        this.occupiedLocations.push(mino);
+      }
+      
       this.tetromino = null;
     }
   }

@@ -6,7 +6,7 @@ const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
 type TetronimoLayout = { label: RotationState, layout: string[][] };
 type TetLocation = { x: number, y: number };
-type MinoLocation = { x: number, y: number, absoluteX: number, absoluteY: number };
+type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
 
 export class Tetromino 
 {
@@ -17,8 +17,7 @@ export class Tetromino
 
     public location: TetLocation;
 
-    private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) 
-    {
+    private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
         this.allLayouts = allLayouts;
         this.orientation = defaultState;
         this.layout = this.layoutFor(defaultState);
@@ -26,8 +25,7 @@ export class Tetromino
         this.location = { x: -1, y: -1 };
     }
 
-    public rotate(direction: RotationOperation) 
-    {
+    public rotate(direction: RotationOperation) {
         const rotationMap = [
             RotationState.O,
             RotationState.R,
@@ -45,8 +43,7 @@ export class Tetromino
         this.layout = this.layoutFor(this.orientation);
     }
 
-    public occupies(worldLocation: TetLocation): boolean {
-      
+    public occupies(worldLocation: TetLocation): boolean {      
       for (let mino of this.Minos()) {
         if (mino.absoluteX === worldLocation.x && mino.absoluteY === worldLocation.y) {
             return true;
@@ -69,7 +66,7 @@ export class Tetromino
             continue;
           }
           
-          const absoluteX = this.location.x + x;
+          const x = this.location.x + x;
           const absoluteY = this.location.y - y;
           
           yield { x, y, absoluteX, absoluteY };
