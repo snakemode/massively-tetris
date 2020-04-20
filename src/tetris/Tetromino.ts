@@ -42,11 +42,16 @@ export class Tetromino {
     }
 
     public occupies(testLoc: TetLocation): boolean {
-      for (let minoY in layout) {
-        for (let minoX in layout) {
+      for (let minoY in this.layout) {
+        for (let minoX in this.layout) {
+
+          const cellValue = this.layout[minoY][minoX];
+          if (cellValue === ' ') { 
+            continue;
+          }
           
-          const locationInWorldX = this.location.x + minoX;
-          const locationInWorldY = this.location.y + minoY;
+          const locationInWorldX = this.location.x + parseInt(minoX);
+          const locationInWorldY = this.location.y + parseInt(minoY);
           
           if (locationInWorldX === testLoc.x && locationInWorldY === testLoc.y) {
             return true;
