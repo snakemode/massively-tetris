@@ -67,25 +67,6 @@ export class Tetromino
       return null;
     }
 
-    public canMove(move: Move, occupiedLocations: Location[] = []): boolean {
-      for (const mino of this.minos()) {
-        
-        const nextX = mino.x + move.deltaX;
-        const nextY = mino.y + move.deltaY;
-        
-        if (nextY <= 0) { 
-          return false; 
-        }
-        
-        const wouldCollideWithOccupied = occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
-        if (wouldCollideWithOccupied) {
-          return false;
-        }
-        
-      }
-      return true;
-    }
-
     public *minos(): IterableIterator<Mino> {
       for (let minoY in this.layout) {
         const relativeY = parseInt(minoY);

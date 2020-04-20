@@ -29,14 +29,33 @@ export class World {
     this.move({ deltaX: 0, deltaY: -1 });
   }
   
-  public move(movement: Move) { 
-    if (this.tetromino.canMove(movement, this.occupiedLocations)) {      
+  public move(movement: Move) {
+    if (this.canMove(movement)) {      
       this.tetromino.location.x = this.tetromino.location.x + movement.deltaX;
       this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
     } else {
       this.lockTetromino();
       this.tetromino = Tetromino.Empty();
     }    
+  }
+
+  public canMove(move: Move): boolean {
+    for (const mino of this.tetromino.minos()) {
+
+      const nextX = mino.x + move.deltaX;
+      const nextY = mino.y + move.deltaY;
+
+      if (nextY <= 0) { 
+        return false; 
+      }
+
+      const wouldCollideWithOccupied = this.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
+      if (wouldCollideWithOccupied) {
+        return false;
+      }
+
+    }
+    return true;
   }
   
   private lockTetromino(): void {
