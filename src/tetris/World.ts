@@ -29,16 +29,18 @@ export class World {
     
     // DO REAL COLLISION DETECTION HERE
     
-    let nextLocationBottom = this.tetromino.location.y - 1;
-    if (nextLocationBottom > 0) {    
-      this.tetromino.location.y = nextLocation;
-    } else {
+    const nextY = this.tetromino.location.y - 1;
+    
+    if (this.tetromino.wouldTouchTheFloor(nextY)) {
       
+      // Lock it in
       for (const mino of this.tetromino.Minos()) {
         this.occupiedLocations.push(mino);
-      }
-      
+      }      
       this.tetromino = null;
+    } else {
+      
+      this.tetromino.location.y = this.tetromino.location.y - 1;
     }
   }
 

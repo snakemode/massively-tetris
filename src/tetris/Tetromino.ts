@@ -55,6 +55,14 @@ export class Tetromino
       return false;
     }
 
+    public wouldTouchTheFloor(yShift: number): boolean {
+      for (const mino of this.Minos()) {
+        if ((mino.y - yShift) <= 0) { 
+          return true; 
+        }
+      }
+      return false;
+    }
 
     public *Minos(): IterableIterator<MinoLocation> {
       for (let minoY in this.layout) {
