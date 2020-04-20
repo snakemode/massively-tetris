@@ -3,11 +3,14 @@ import { World } from "../tetris/World";
 import { Move, Mino, ValidTetronimo, Cell } from "../tetris/Types";
 
 const canvas: any = document.getElementById("game");
+const score: any = document.getElementById("score");
 const ctx = canvas.getContext("2d");
 
 const minoSize = 30;
 
 export function render(game: Tetris) {
+  score.innerHTML = game.world.score;
+  
   let index = -1;
   
   for (const row of game.world.rows()) {        

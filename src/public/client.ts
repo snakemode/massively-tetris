@@ -1,7 +1,5 @@
 import { Tetris } from "../tetris/Tetris";
-import { World } from "../tetris/World";
 import { uuidv4 } from "../util";
-import { Move } from "../tetris/Types";
 import { Controls } from "./Controls";
 import { render } from "./render";
 
