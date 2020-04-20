@@ -1,5 +1,7 @@
 import { Location, ValidTetronimo, Move, Mino, Cell } from './Types';
 import { RotationOperation } from './RotationOperation';
+import { IRotationSystem } from './IRotationSystem';
+import { SuperRotationSystem } from './SuperRotationSystem';
 import { Tetromino } from "./Tetromino";
 
 type Row = Cell[];
@@ -13,6 +15,8 @@ export class World {
 
   public occupiedLocations: Mino[];
   public tetromino: Tetromino;
+
+  public rotationSystem: IRotationSystem;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
     this.playerId = playerId;
@@ -50,7 +54,9 @@ export class World {
     }    
   }
 
-  public rotate(direction: RotationOperation)
+  public rotate(direction: RotationOperation) {
+    
+  }
 
   public canMove(move: Move): MoveResult {
     for (const mino of this.tetromino.minos()) {
