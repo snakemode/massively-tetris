@@ -29,8 +29,8 @@ export class World {
     
     // DO REAL COLLISION DETECTION HERE
     
-    let nextLocation = this.tetromino.location.y - 1;
-    if (nextLocation > 0) {    
+    let nextLocationBottom = this.tetromino.location.y - 1;
+    if (nextLocationBottom > 0) {    
       this.tetromino.location.y = nextLocation;
     } else {
       

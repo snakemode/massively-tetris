@@ -15,6 +15,8 @@ export class Tetromino
     public layout: string[][];
     public locked: boolean;
 
+    get height() { return this.layout.length }
+
     public location: TetLocation;
 
     private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
@@ -45,7 +47,7 @@ export class Tetromino
 
     public occupies(worldLocation: TetLocation): boolean {      
       for (let mino of this.Minos()) {
-        if (mino.absoluteX === worldLocation.x && mino.absoluteY === worldLocation.y) {
+        if (mino.x === worldLocation.x && mino.y === worldLocation.y) {
             return true;
         } 
       }
@@ -56,20 +58,20 @@ export class Tetromino
 
     public *Minos(): IterableIterator<MinoLocation> {
       for (let minoY in this.layout) {
-        const y = parseInt(minoY);
+        const relativeY = parseInt(minoY);
         
         for (let minoX in this.layout) {
-          const x = parseInt(minoX);
+          const relativeX = parseInt(minoX);
 
-          const cellValue = this.layout[y][x];
+          const cellValue = this.layout[relativeY][relativeX];
           if (cellValue === ' ') { 
             continue;
           }
           
-          const x = this.location.x + x;
-          const absoluteY = this.location.y - y;
+          const x = this.location.x + relativeX;
+          const y = this.location.y - relativeY;
           
-          yield { x, y, absoluteX, absoluteY };
+          yield { x, y, relativeX, relativeY };
         }
       }
     }
