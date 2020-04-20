@@ -1,6 +1,5 @@
 import { SuperRotationSystem } from "./SuperRotationSystem";
-import { RotationState } from "./RotationState";
-import { RotationOperation } from "./RotationOperation";
+import { RotationState, RotationOperation } from "./Types";
 import { Tetromino } from './Tetromino';
 
 /*

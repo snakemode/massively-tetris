@@ -1,4 +1,4 @@
-import { RotationState } from './RotationState';
+import { RotationState } from './Types';
 
 // Matrix rotations are for suckers.
 

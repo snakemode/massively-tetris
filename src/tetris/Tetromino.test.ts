@@ -1,6 +1,4 @@
-import { RotationState } from "./RotationState";
-import { RotationOperation } from "./RotationOperation";
-import { ValidTetronimo } from './Types';
+import { RotationState, RotationOperation, ValidTetronimo } from './Types';
 import { Tetromino } from './Tetromino';
 
 describe("Tetromino", () => {

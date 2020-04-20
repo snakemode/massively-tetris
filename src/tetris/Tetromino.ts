@@ -1,7 +1,5 @@
-import { Location, ValidTetronimo, Mino, Move } from './Types';
+import { Location, ValidTetronimo, Mino, Move, RotationOperation, RotationState } from './Types';
 import { AllLayouts } from './TetrominoLayouts';
-import { RotationState } from './RotationState';
-import { RotationOperation } from './RotationOperation';
 
 export type TetronimoLayout = { label: RotationState, layout: string[][] };
 
