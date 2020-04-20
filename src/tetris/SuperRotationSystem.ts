@@ -33,9 +33,8 @@ export class SuperRotationSystem implements IRotationSystem {
     
     for (var mino of withRotationApplied.minos()) {   
       
-      console.log(mino);
-      if (mino.y <= 0) { 
-        return true; 
+      if (mino.y < 0) { 
+        return true;
       }
       
       if (mino.x < 0 || mino.x >= this.world.width) {
@@ -51,11 +50,6 @@ export class SuperRotationSystem implements IRotationSystem {
   }
 
   private getWallKicksFor(direction: RotationOperation): KickDelta[] {
-
-    if(this.world.tetromino.shape == "O") {
-      return [ { deltaX: 0, deltaY: 0 } ];
-    }
-
     const ruleset = [ "J", "L", "S", "T", "Z" ].indexOf(this.world.tetromino.shape) != -1 
       ? generalKickRules 
       : kickRulesForI;
@@ -63,7 +57,7 @@ export class SuperRotationSystem implements IRotationSystem {
     const kickRules = ruleset.get(this.world.tetromino.orientation);
 
     if (kickRules == null) {
-      throw "Kick rules for " + this.world.tetromino.shape + " not found.";
+      return [ { deltaX: 0, deltaY: 0 } ];
     }
 
     if (direction == RotationOperation.Left) {

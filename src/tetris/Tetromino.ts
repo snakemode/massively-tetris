@@ -51,8 +51,7 @@ export class Tetromino {
     }
     
     public previewRotation(direction: RotationOperation): Tetromino {
-      const clone = new Tetromino(this.shape, this.allLayouts, this.orientation);
-      return clone.rotate(direction); // ☜(ﾟヮﾟ☜) YOLO
+      return this.clone().rotate(direction); // ☜(ﾟヮﾟ☜) YOLO
     }
 
     public occupies(worldLocation: Location): boolean {
@@ -84,6 +83,13 @@ export class Tetromino {
 
     private layoutFor(state: RotationState) {        
         return this.allLayouts.filter(l => l.label == state)[0].layout;
+    }
+
+    public clone() {
+      const clone = new Tetromino(this.shape, this.allLayouts, this.orientation);
+      clone.location.x = this.location.x;
+      clone.location.y = this.location.y;
+      return clone;
     }
 
     public static create(shape: ValidTetronimo): Tetromino {
