@@ -44,6 +44,10 @@ export class World {
     }
         
     this.move({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
+
+    for (let row in this.rows()) {
+      
+    }
   }
   
   public move(move: Move) {
