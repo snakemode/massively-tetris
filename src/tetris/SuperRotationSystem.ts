@@ -15,15 +15,17 @@ export class SuperRotationSystem implements IRotationSystem {
 
   public rotate(direction: RotationOperation) {
     const kickRules = this.getWallKicksFor(direction);
+    console.log("got rules", kickRules);
 
     for (let rule of kickRules) {
-      console.log(rule)
+
       const rotated = this.world.tetromino.previewRotation(direction);    
       rotated.location.x += rule.deltaX;
       rotated.location.y += rule.deltaY;
 
       if (!this.collidesWithSomething(rotated)) {
-        this.world.tetromino = rotated;
+        console.log("Found a spot to rotate to.");
+        this.world.tetromino.rotate(direction);
         return;
       }
     }
@@ -46,7 +48,11 @@ export class SuperRotationSystem implements IRotationSystem {
       ? generalKickRules 
       : kickRulesForI;
 
-    const kickRules = ruleset[direction];
+    const kickRules = ruleset.get(this.world.tetromino.orientation);
+
+    if (kickRules == null) {
+      throw "Kick rules for " + this.world.tetromino.shape + " not found.";
+    }
 
     if (direction == RotationOperation.Left) {
       for (let rule of kickRules) {
