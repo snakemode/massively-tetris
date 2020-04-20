@@ -1,4 +1,6 @@
 
+import { Tetromino } from "./Tetromino";
+
 type Cell = { x: number, y: number, occupied: boolean };
 type Row = Cell[];
 type Location = { x: number, y: number };
@@ -10,13 +12,20 @@ export class World {
   public height: number;
 
   public occupiedLocations: Location[];
+  public tetromino: Tetromino;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
     this.playerId = playerId;
     this.width = width;
     this.height = height;
     this.occupiedLocations = [];
-  }    
+  }
+
+  public tick(): void {
+    if (!this.tetromino) {
+      
+    }
+  }
 
   public *Cells(): IterableIterator<Cell> {
     for (let row of this.Rows()) {

@@ -20,7 +20,9 @@ export class Tetris {
     }, 1000, this);
   }
 
-  public tick() {
-
+  public tick() {    
+    for (const world of this.Worlds) {
+      world.tick();
+    }
   }
 }

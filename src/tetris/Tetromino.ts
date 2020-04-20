@@ -11,11 +11,14 @@ export class Tetromino {
     public layout: string[][];
     public locked: boolean;
 
+    public location: { x: number, y: number };
+
     private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
         this.allLayouts = allLayouts;
         this.orientation = defaultState;
         this.layout = this.layoutFor(defaultState);
         this.locked = false;
+        this.location = { x: -1, y: -1 };
     }
 
     public rotate(direction: RotationOperation) {

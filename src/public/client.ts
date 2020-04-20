@@ -22,9 +22,13 @@ function renderWorld(world: World) {
     for (const cell of row) {
       cellIndex++;
       const offsetX = cellIndex * minoSize;
-
-      ctx.fillStyle = cell.occupied ? "black" : "green";
+      
+      
+      ctx.fillStyle = "black";
       ctx.fillRect(offsetX, offsetY, minoSize, minoSize);            
+
+      ctx.fillStyle = cell.occupied ? "red" : "white";
+      ctx.fillRect(offsetX + 1, offsetY + 1, minoSize - 2, minoSize - 2);    
     }        
   }   
 }
@@ -45,7 +49,7 @@ function start() {
 
     setInterval(function() {
         render(game);
-    }, 1000);
+    }, 33);
     
 }
 
