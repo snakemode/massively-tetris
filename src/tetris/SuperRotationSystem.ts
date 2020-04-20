@@ -15,7 +15,6 @@ export class SuperRotationSystem implements IRotationSystem {
 
   public rotate(direction: RotationOperation) {
     const kickRules = this.getWallKicksFor(direction);
-    console.log("got rules", kickRules);
 
     for (let rule of kickRules) {
 
@@ -24,7 +23,6 @@ export class SuperRotationSystem implements IRotationSystem {
       rotated.location.y += rule.deltaY;
 
       if (!this.collidesWithSomething(rotated)) {
-        console.log("Found a spot to rotate to.");
         this.world.tetromino.rotate(direction);
         return;
       }
@@ -33,7 +31,17 @@ export class SuperRotationSystem implements IRotationSystem {
 
   private collidesWithSomething(withRotationApplied: Tetromino) {
     
-    for (var mino of withRotationApplied.minos()) {       
+    for (var mino of withRotationApplied.minos()) {   
+      
+      console.log(mino);
+      if (mino.y <= 0) { 
+        return true; 
+      }
+      
+      if (mino.x < 0 || mino.x >= this.world.width) {
+        return true;
+      }
+
       const collisions = this.world.occupiedLocations.filter(loc => loc.x == mino.x && loc.y == mino.y);
       if (collisions.length > 0) {
         return true;
@@ -43,6 +51,10 @@ export class SuperRotationSystem implements IRotationSystem {
   }
 
   private getWallKicksFor(direction: RotationOperation): KickDelta[] {
+
+    if(this.world.tetromino.shape == "O") {
+      return [ { deltaX: 0, deltaY: 0 } ];
+    }
 
     const ruleset = [ "J", "L", "S", "T", "Z" ].indexOf(this.world.tetromino.shape) != -1 
       ? generalKickRules 
