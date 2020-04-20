@@ -13,13 +13,15 @@ export class SuperRotationSystem implements IRotationSystem {
 
   public rotate(direction: RotationOperation) {
     const withRotationApplied = this.world.tetromino.previewRotation(direction);
-    
-    
-    
+        
     const wouldCollideWithOccupied = this.world.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
     if (wouldCollideWithOccupied) {
       
     }
+    
+    const wallKicks = [
+      
+    ];
 
     // this.world.tetromino.rotate(direction);
 
