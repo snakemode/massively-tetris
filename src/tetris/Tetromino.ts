@@ -1,10 +1,8 @@
-import { Location } from './Types';
+import { Location, ValidTetronimo, Mino } from './Types';
 import { RotationState } from './RotationState';
 import { RotationOperation } from './RotationOperation';
 
 export type TetronimoLayout = { label: RotationState, layout: string[][] };
-export type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
-export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_" | "Empty";
 
 const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
@@ -74,7 +72,7 @@ export class Tetromino
       return true;
     }
 
-    public *Minos(): IterableIterator<MinoLocation> {
+    public *Minos(): IterableIterator<Mino> {
       for (let minoY in this.layout) {
         const relativeY = parseInt(minoY);
         
@@ -88,8 +86,9 @@ export class Tetromino
           
           const x = this.location.x + relativeX;
           const y = this.location.y - relativeY;
+          const shape = this.shape;
           
-          yield { x, y, relativeX, relativeY };
+          yield { x, y, relativeX, relativeY, shape };
         }
       }
     }
