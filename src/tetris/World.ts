@@ -24,13 +24,13 @@ export class World {
   public tick(): void {
     if (!this.tetromino) {
       this.tetromino = Tetromino.random();
-      this.tetromino.location = { x: 3, y: -2 };
+      this.tetromino.location = { x: 3, y: 22 };
     }
     
     // DO REAL COLLISION DETECTION HERE
     
-    let nextLocation = this.tetromino.location.y + 1;
-    if (nextLocation < 21) {    
+    let nextLocation = this.tetromino.location.y - 1;
+    if (nextLocation > 0) {    
       this.tetromino.location.y = nextLocation;
     } else {
       this.tetromino = null;
@@ -46,7 +46,9 @@ export class World {
   }
 
   public *Rows(): IterableIterator<Row> {    
-    for (let y = 0; y < this.height; y++) {
+    for (let yLoop = 0; yLoop < this.height; yLoop++) {
+      const y: number = this.height - yLoop;
+      
       const row: Row = [];
       
       for (let x = 0; x < this.width; x++) {
