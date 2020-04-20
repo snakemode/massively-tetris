@@ -1,7 +1,7 @@
 import { Tetris } from "../tetris/Tetris";
 import { World } from "../tetris/World";
 import { uuidv4 } from "../util";
-import { Move } from "./tetris/Types";
+import { Move } from "../tetris/Types";
 import { Controls } from "./Controls";
 
 const canvas: any = document.getElementById("game");
@@ -37,6 +37,7 @@ let controls: Controls;
 function start() {
   game = new Tetris();
   controls = new Controls(game);
+  controls.connect();
 
   const playerId = uuidv4();
   game.addPlayer(playerId);

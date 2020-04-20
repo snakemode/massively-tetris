@@ -1,4 +1,5 @@
-import { Move } from "./tetris/Types";
+import { Move } from "../tetris/Types";
+import { Tetris } from "../tetris/Tetris";
 
 export class Controls {
   
@@ -9,20 +10,24 @@ export class Controls {
   }
   
   public processInput(keyPressed) {
+    console.log("pressed");
     const key = keyPressed.key.toLowerCase();
-    const movementDelta = this.toMove(key);
+    const movement = toMove(key);
+    this.game.world.move(movement);
   }
 
-  private toMove(key: string): Move {
-    switch(key) {
-      case "a": return { deltaX: -1, deltaY: 0 };
-      case "s": return { deltaX: 0, deltaY: -1 };
-      case "d": return { deltaX: 1, deltaY: 0 };
-      default: return { deltaX: 0, deltaY: 0 };
-    }    
-  }
   
-  public startGame() {                
-    window.addEventListener("keypress", function(e) { this.processInput(e) }, false);
+  public connect() {
+    window.addEventListener("keypress", this.processInput, false);
   }
+}
+
+
+const toMove = (key: string): Move => {
+  switch(key) {
+    case "a": return { deltaX: -1, deltaY: 0 };
+    case "s": return { deltaX: 0, deltaY: -1 };
+    case "d": return { deltaX: 1, deltaY: 0 };
+    default: return { deltaX: 0, deltaY: 0 };
+  }    
 }
