@@ -45,7 +45,7 @@ export class Tetromino
         this.layout = this.layoutFor(this.orientation);
     }
 
-    public occupies(worldLocation: TetLocation): boolean {      
+    public occupies(worldLocation: Location): boolean {      
       for (let mino of this.Minos()) {
         if (mino.x === worldLocation.x && mino.y === worldLocation.y) {
             return true;
@@ -55,7 +55,7 @@ export class Tetromino
       return false;
     }
 
-    public wouldCollide(occupiedLocations: Location[] = []): boolean {
+    public canMove(occupiedLocations: Location[] = []): boolean {
       for (const mino of this.Minos()) {
         const nextY = mino.y - 1;
         
@@ -107,6 +107,7 @@ export class Tetromino
     public static T(): Tetromino { return this.create("T") }
     public static Z(): Tetromino { return this.create("Z") }
     public static O(): Tetromino { return this.create("O") }
+    public static (): Tetromino { return this.create("O") }
 
     public static random(): Tetromino {
       let shuffled = valid
