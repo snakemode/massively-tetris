@@ -1,6 +1,12 @@
 /* styles */
 /* called by your view template */
 
+#game {
+  border: 1px solid black;
+}
+
+
+
 * {
   box-sizing: border-box;
 }
