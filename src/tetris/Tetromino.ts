@@ -5,6 +5,7 @@ export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_";
 const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
 type TetronimoLayout = { label: RotationState, layout: string[][] };
+type Location = { x: number, y: number };
 type TetLocation = { x: number, y: number };
 type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
 
@@ -55,11 +56,19 @@ export class Tetromino
       return false;
     }
 
-    public wouldTouchTheFloor(yShift: number): boolean {
+    public wouldCollide(occupiedLocations: Location[] = []): boolean {
       for (const mino of this.Minos()) {
-        if ((mino.y - yShift) <= 0) { 
+        const nextY = mino.y - 1;
+        
+        if (nextY <= 0) { 
           return true; 
         }
+        
+        const wouldCollideWithOccupied = occupiedLocations.filter(loc => loc.x == mino.x && loc.y == nextY).length;
+        if (wouldCollideWithOccupied) {
+          return true;
+        }
+        
       }
       return false;
     }

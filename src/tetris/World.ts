@@ -29,9 +29,7 @@ export class World {
     
     // DO REAL COLLISION DETECTION HERE
     
-    const nextY = this.tetromino.location.y - 1;
-    
-    if (this.tetromino.wouldTouchTheFloor(nextY)) {
+    if (this.tetromino.wouldCollide(this.occupiedLocations)) {
       
       // Lock it in
       for (const mino of this.tetromino.Minos()) {
