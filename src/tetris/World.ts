@@ -1,4 +1,5 @@
 import { Location, ValidTetronimo, Move, Mino, Cell } from './Types';
+import { RotationOperation } from './RotationOperation';
 import { Tetromino } from "./Tetromino";
 
 type Row = Cell[];
@@ -46,9 +47,10 @@ export class World {
     if (moveCheck.lock) {
       this.lockTetromino();
       this.tetromino = Tetromino.Empty();
-    }
-    
+    }    
   }
+
+  public rotate(direction: RotationOperation)
 
   public canMove(move: Move): MoveResult {
     for (const mino of this.tetromino.minos()) {
