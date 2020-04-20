@@ -24,29 +24,28 @@ export class World {
   public tick(): void {
     if (this.tetromino.shape === "Empty") {
       this.tetromino = Tetromino.random();
-      this.tetromino.location = { x: 3, y: this.height + 2 };
+      this.tetromino.location = { x: 3, y: this.height + 2 }; 
+      
+      const moveCheck = this.canMove({ deltaX: 0, deltaY: -1 });
+      if (!moveCheck.canMove) {
+        console.log("❌ Game over!");
+      }    
     }
         
     this.move({ deltaX: 0, deltaY: -1 });
   }
   
   public move(movement: Move) {
+    const moveCheck = this.canMove(movement);
     
-    const result = this.canMove(movement);
-    
-    if (result.canMove) 
-    {      
+    if (moveCheck.canMove) {      
       this.tetromino.location.x = this.tetromino.location.x + movement.deltaX;
       this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
     } 
-    else if (result.lock) 
-    {
+    
+    if (moveCheck.lock) {
       this.lockTetromino();
       this.tetromino = Tetromino.Empty();
-    } 
-    else 
-    {      
-      // NOOP
     }
     
   }
@@ -67,7 +66,7 @@ export class World {
 
       const wouldCollideWithOccupied = this.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
       if (wouldCollideWithOccupied) {
-        return { canMove: false, lock: false };
+        return { canMove: false, lock: true };
       }
 
     }

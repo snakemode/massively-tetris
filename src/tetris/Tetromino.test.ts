@@ -9,7 +9,7 @@ describe("Tetromino", () => {
 
         let tetromino: Tetromino;
         beforeEach(() => {
-            tetromino = Tetromino.I();
+            tetromino = Tetromino.create("I");
         });
 
         it("Can rotate Right", () => {

@@ -51,14 +51,18 @@ export class Tetromino
         this.setOrientation(nextOrientation);
     }
 
-    public occupies(worldLocation: Location): boolean {      
-      for (let mino of this.minos()) {
+    public occupies(worldLocation: Location): boolean {
+      const all = [...this.minos()];
+      const thatMatch = all.filter(m => m.x === worldLocation.x && m.y === worldLocation.y);
+      return thatMatch.length > 0;
+      
+      /*for (let mino of this.minos()) {
         if (mino.x === worldLocation.x && mino.y === worldLocation.y) {
             return true;
-        } 
+        }
       }
       
-      return false;
+      return false;*/
     }
 
     public *minos(): IterableIterator<Mino> {
@@ -89,14 +93,7 @@ export class Tetromino
     public static create(shape: ValidTetronimo): Tetromino {
         return new Tetromino(shape, AllLayouts[shape]);
     }
-    
-    public static I(): Tetromino { return this.create("I") }
-    public static J(): Tetromino { return this.create("J") }
-    public static L(): Tetromino { return this.create("L") }
-    public static S(): Tetromino { return this.create("S") }
-    public static T(): Tetromino { return this.create("T") }
-    public static Z(): Tetromino { return this.create("Z") }
-    public static O(): Tetromino { return this.create("O") }
+
     public static Empty(): Tetromino { return this.create("Empty") }
 
     public static random(): Tetromino {
