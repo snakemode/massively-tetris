@@ -23,7 +23,7 @@ export class SuperRotationSystem implements IRotationSystem {
       rotated.location.y += rule.deltaY;
 
       if (!this.collidesWithSomething(rotated)) {
-        this.world.tetromino.rotate(direction);
+        this.world.tetromino = rotated;
         return;
       }
     }
