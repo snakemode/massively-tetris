@@ -2,6 +2,7 @@ import { Location, ValidTetronimo, Move, Mino, Cell } from './Types';
 import { Tetromino } from "./Tetromino";
 
 type Row = Cell[];
+type MoveResult = { canMove: boolean, lock: boolean };
 
 export class World {
 
@@ -30,32 +31,47 @@ export class World {
   }
   
   public move(movement: Move) {
-    if (this.canMove(movement)) {      
+    
+    const result = this.canMove(movement);
+    
+    if (result.canMove) 
+    {      
       this.tetromino.location.x = this.tetromino.location.x + movement.deltaX;
       this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
-    } else {
+    } 
+    else if (result.lock) 
+    {
       this.lockTetromino();
       this.tetromino = Tetromino.Empty();
-    }    
+    } 
+    else 
+    {      
+      // NOOP
+    }
+    
   }
 
-  public canMove(move: Move): boolean {
+  public canMove(move: Move): MoveResult {
     for (const mino of this.tetromino.minos()) {
 
       const nextX = mino.x + move.deltaX;
       const nextY = mino.y + move.deltaY;
 
       if (nextY <= 0) { 
-        return false; 
+        return { canMove: false, lock: true }; 
+      }
+      
+      if (nextX < 0 || nextX >= this.width) {
+        return { canMove: false, lock: false };
       }
 
       const wouldCollideWithOccupied = this.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
       if (wouldCollideWithOccupied) {
-        return false;
+        return { canMove: false, lock: false };
       }
 
     }
-    return true;
+    return { canMove: true, lock: false };
   }
   
   private lockTetromino(): void {

@@ -61,17 +61,6 @@ export class Tetromino
       return false;
     }
 
-    public minoFor(worldLocation: Location): Mino | null {  
-      const allMinos = [...this.minos()];
-      console.log(allMinos);
-      const filtered = allMinos.filter(m => m.x === worldLocation.x && m.y === worldLocation.y);
-
-      if (filtered.length > 0) {
-        return filtered[0];
-      }
-      return null;
-    }
-
     public *minos(): IterableIterator<Mino> {
       for (let minoY in this.layout) {
         const relativeY = parseInt(minoY);
