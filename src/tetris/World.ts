@@ -36,22 +36,23 @@ export class World {
       this.tetromino = Tetromino.random();
       this.tetromino.location = { x: 3, y: this.height + 2 }; 
       
-      const moveCheck = this.canMove({ deltaX: 0, deltaY: -1 });
-      if (!moveCheck.canMove) {
+      const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
+      
+      if (!gameOverCheck.canMove) {
         console.log("❌ Game over!");
         this.gameOver = true;
       }    
     }
         
-    this.move({ deltaX: 0, deltaY: -1 });
+    this.moveTetromino({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
   }
   
-  public move(movement: Move) {
-    const moveCheck = this.canMove(movement);
+  public moveTetromino(move: Move) {
+    const moveCheck = this.canMove(move);
     
     if (moveCheck.canMove) {      
-      this.tetromino.location.x = this.tetromino.location.x + movement.deltaX;
-      this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
+      this.tetromino.location.x = this.tetromino.location.x + move.deltaX;
+      this.tetromino.location.y = this.tetromino.location.y + move.deltaY;
     } 
     
     if (moveCheck.lock) {
