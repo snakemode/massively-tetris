@@ -56,7 +56,7 @@ export class Tetromino {
           }
           
           const locationInWorldX = this.location.x + x;
-          const locationInWorldY = this.location.y + y;
+          const locationInWorldY = this.location.y - y;
           
           if (locationInWorldX === testLoc.x && locationInWorldY === testLoc.y) {
             return true;

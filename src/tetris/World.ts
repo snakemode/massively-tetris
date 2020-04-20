@@ -23,8 +23,8 @@ export class World {
 
   public tick(): void {
     if (!this.tetromino) {
-      this.tetromino = Tetromino.L();
-      this.tetromino.location = { x: 3, y: 22 };
+      this.tetromino = Tetromino.random();
+      this.tetromino.location = { x: 3, y: this.height + 2 };
     }
     
     // DO REAL COLLISION DETECTION HERE
