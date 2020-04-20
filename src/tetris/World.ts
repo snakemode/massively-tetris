@@ -1,7 +1,7 @@
 import { Location } from './Types';
-import { Tetromino } from "./Tetromino";
+import { Tetromino, ValidTetronimo } from "./Tetromino";
 
-type Cell = { x: number, y: number, occupied: boolean };
+type Cell = { x: number, y: number, occupied: boolean, occupant };
 type Row = Cell[];
 
 export class World {
@@ -11,18 +11,18 @@ export class World {
   public height: number;
 
   public occupiedLocations: Location[];
-  public tetromino: Tetromino | null;
+  public tetromino: Tetromino;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
     this.playerId = playerId;
     this.width = width;
     this.height = height;
     this.occupiedLocations = [];
-    this.tetromino = null;
+    this.tetromino = Tetromino.Empty();
   }
 
   public tick(): void {
-    if (!this.tetromino) {
+    if (this.tetromino.shape === "Empty") {
       this.tetromino = Tetromino.random();
       this.tetromino.location = { x: 3, y: this.height + 2 };
     }
@@ -31,7 +31,7 @@ export class World {
       this.tetromino.location.y = this.tetromino.location.y - 1;
     } else {
       this.setMinosIntoWorld();
-      this.tetromino = null;
+      this.tetromino = Tetromino.Empty();
     }
   }
   

@@ -2,13 +2,10 @@ import { Tetris } from "../tetris/Tetris";
 import { World } from "../tetris/World";
 import { uuidv4 } from "../util";
 
-console.log("Hello from client side TypeScript");
-
 const world: any = document.getElementById("game");
 var ctx = world.getContext("2d");
 
 const minoSize = 30;
-
 
 function renderWorld(world: World) {
   let index = -1;

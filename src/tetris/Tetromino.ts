@@ -4,12 +4,13 @@ import { RotationOperation } from './RotationOperation';
 
 export type TetronimoLayout = { label: RotationState, layout: string[][] };
 export type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
-export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_";
+export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_" | "Empty";
 
 const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
 export class Tetromino 
 {
+    public shape: ValidTetronimo;
     public orientation: RotationState;
     public allLayouts: TetronimoLayout[];
     public layout: string[][];
@@ -19,7 +20,8 @@ export class Tetromino
 
     public location: Location;
 
-    private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
+    private constructor(shape: ValidTetronimo, allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
+        this.shape = shape;
         this.allLayouts = allLayouts;
         this.orientation = defaultState;
         this.layout = this.layoutFor(defaultState);
@@ -97,7 +99,7 @@ export class Tetromino
     }
 
     public static create(shape: ValidTetronimo): Tetromino {
-        return new Tetromino(layouts[shape]);
+        return new Tetromino(shape, layouts[shape]);
     }
     
     public static I(): Tetromino { return this.create("I") }
@@ -107,7 +109,7 @@ export class Tetromino
     public static T(): Tetromino { return this.create("T") }
     public static Z(): Tetromino { return this.create("Z") }
     public static O(): Tetromino { return this.create("O") }
-    public static (): Tetromino { return this.create("O") }
+    public static Empty(): Tetromino { return this.create("Empty") }
 
     public static random(): Tetromino {
       let shuffled = valid
@@ -160,6 +162,41 @@ const layouts = {
             ]
         },            
     ],
+  
+    "Empty": [
+        { 
+            label: RotationState.O,
+            layout: [
+                "   ".split(''),
+                "   ".split(''),
+                "   ".split('')
+            ]
+        },
+        { 
+            label: RotationState.R,
+            layout: [
+                "   ".split(''),
+                "   ".split(''),
+                "   ".split('')
+            ]
+        },
+        { 
+            label: RotationState.TWO,
+            layout: [
+                "   ".split(''),
+                "   ".split(''),
+                "   ".split('')
+            ]
+        },
+        { 
+            label: RotationState.L,
+            layout: [
+                "   ".split(''),
+                "   ".split(''),
+                "   ".split('')
+            ]
+        },            
+    ],  
 
     "I": [
             { 
