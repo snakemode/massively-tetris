@@ -30,8 +30,9 @@ export class World {
     this.move({ deltaX: 0, deltaY: -1 });
   }
   
-  public move(movement: Move) {    
+  public move(movement: Move) { 
     if (this.tetromino.canMove(movement, this.occupiedLocations)) {      
+      this.tetromino.location.x = this.tetromino.location.x + movement.deltaX;
       this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
     } else {
       this.lockTetromino();

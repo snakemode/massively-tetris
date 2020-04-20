@@ -9,8 +9,7 @@ export class Controls {
     this.game = game;
   }
   
-  public processInput(keyPressed) {
-    console.log("pressed");
+  public processInput(keyPressed: any) {
     const key = keyPressed.key.toLowerCase();
     const movement = toMove(key);
     this.game.world.move(movement);
@@ -18,7 +17,9 @@ export class Controls {
 
   
   public connect() {
-    window.addEventListener("keypress", this.processInput, false);
+    window.addEventListener("keypress", (args) => {
+      this.processInput(args);
+    }, false);
   }
 }
 
