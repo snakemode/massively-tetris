@@ -13,9 +13,11 @@ export class Controls {
     const key = keyPressed.key.toLowerCase();
     const movement = toMove(key);
     
-    if (movement.rotation != )
-    
-    this.game.world.moveTetromino(movement);
+    if (movement.rotation != RotationOperation.None) {      
+      this.game.world.rotate(movement.rotation);
+    } else {    
+      this.game.world.move(movement);
+    }
   }
 
   

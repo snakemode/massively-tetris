@@ -52,7 +52,8 @@ export class Tetromino {
     }
     
     public previewRotation(direction: RotationOperation): Tetromino {
-      return JSON.parse(JSON.stringify(this)).rotate(direction); // ☜(ﾟヮﾟ☜) YOLO
+      const clone = new Tetromino(this.shape, this.allLayouts, this.orientation);
+      return clone.rotate(direction); // ☜(ﾟヮﾟ☜) YOLO
     }
 
     public occupies(worldLocation: Location): boolean {

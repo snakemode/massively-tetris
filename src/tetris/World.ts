@@ -44,10 +44,10 @@ export class World {
       }    
     }
         
-    this.moveTetromino({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
+    this.move({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
   }
   
-  public moveTetromino(move: Move) {
+  public move(move: Move) {
     const moveCheck = this.canMove(move);
     
     if (moveCheck.canMove) {      
