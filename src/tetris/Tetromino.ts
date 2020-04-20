@@ -74,7 +74,7 @@ export class Tetromino
       return true;
     }
 
-    public *Minos(): IterableIterator<Mino> {
+    public *minos(): IterableIterator<Mino> {
       for (let minoY in this.layout) {
         const relativeY = parseInt(minoY);
         

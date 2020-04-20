@@ -40,20 +40,20 @@ export class World {
   }
   
   private lockTetromino(): void {
-    for (const mino of this.tetromino.Minos()) {
+    for (const mino of this.tetromino.minos()) {
       this.occupiedLocations.push(mino);
     }   
   }
 
-  public *Cells(): IterableIterator<Cell> {
-    for (let row of this.Rows()) {
+  public *cells(): IterableIterator<Cell> {
+    for (let row of this.rows()) {
       for (let cell of row) {
         yield cell;
       }    
     }
   }
 
-  public *Rows(): IterableIterator<Row> {    
+  public *rows(): IterableIterator<Row> {    
     for (let yLoop = 0; yLoop < this.height; yLoop++) {
       const y: number = this.height - yLoop;
       

@@ -3,15 +3,13 @@ import { World } from "./World";
 
 export class Tetris {
 
-  public Worlds: World[];
+  public world: World;
 
   constructor() {
-    this.Worlds = [];
+    this.world = new World("player1");
   }
 
   public addPlayer(playerId: string) {
-    const newWorld = new World(playerId);
-    this.Worlds.push(newWorld);
   }
 
   public start(): void {
@@ -21,8 +19,6 @@ export class Tetris {
   }
 
   public tick() {    
-    for (const world of this.Worlds) {
-      world.tick();
-    }
+    this.world.tick();
   }
 }
