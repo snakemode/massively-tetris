@@ -23,13 +23,18 @@ export class World {
 
   public tick(): void {
     if (!this.tetromino) {
-      this.tetromino = Tetromino.I();
+      this.tetromino = Tetromino.random();
       this.tetromino.location = { x: 3, y: -2 };
     }
     
-    const nextLocation = this.tetromino.location.y + 1;
+    // DO REAL COLLISION DETECTION HERE
     
-    this.tetromino.location.y++;
+    let nextLocation = this.tetromino.location.y + 1;
+    if (nextLocation < 21) {    
+      this.tetromino.location.y = nextLocation;
+    } else {
+      this.tetromino = null;
+    }
   }
 
   public *Cells(): IterableIterator<Cell> {

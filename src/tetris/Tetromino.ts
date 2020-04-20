@@ -2,6 +2,8 @@ import { RotationState } from './RotationState';
 import { RotationOperation } from './RotationOperation';
 
 export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_";
+const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
+
 type TetronimoLayout = { label: RotationState, layout: string[][] };
 
 type TetLocation = { x: number, y: number };
@@ -77,6 +79,15 @@ export class Tetromino {
     public static T(): Tetromino { return this.create("T") }
     public static Z(): Tetromino { return this.create("Z") }
     public static O(): Tetromino { return this.create("O") }
+
+    public static random(): Tetromino {
+      let shuffled = valid
+                    .map((a) => ({sort: Math.random(), value: a}))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((a) => a.value);
+      
+      return Tetromino.create(shuffled[0]);
+    }
 }
 
 const layouts = {
