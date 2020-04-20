@@ -1,8 +1,7 @@
 import { Location, ValidTetronimo, Mino, Move, RotationOperation, RotationState } from './Types';
 import { AllLayouts } from './TetrominoLayouts';
 
-export type TetronimoLayout = { label: RotationState, layout: string[][] };
-
+type TetronimoLayout = { label: RotationState, layout: string[][] };
 const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
 export class Tetromino {

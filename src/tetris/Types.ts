@@ -7,3 +7,7 @@ export type Cell = { x: number, y: number, occupied: boolean, origin: ValidTetro
 
 export enum RotationOperation { Left = -1, None = 0, Right = 1 };
 export enum RotationState { L, O, R, TWO };
+
+export interface IRotationSystem {
+    rotate(direction: RotationOperation);
+}

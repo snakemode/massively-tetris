@@ -1,5 +1,4 @@
-import { Location, ValidTetronimo, Move, Mino, Cell, RotationOperation } from './Types';
-import { IRotationSystem } from './IRotationSystem';
+import { Location, ValidTetronimo, Move, Mino, Cell, RotationOperation, IRotationSystem } from './Types';
 import { SuperRotationSystem } from './SuperRotationSystem';
 import { Tetromino } from "./Tetromino";
 
