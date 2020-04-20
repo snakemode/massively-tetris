@@ -1,7 +1,6 @@
-import { Location, ValidTetronimo, Move, Mino } from './Types';
+import { Location, ValidTetronimo, Move, Mino, Cell } from './Types';
 import { Tetromino } from "./Tetromino";
 
-type Cell = { x: number, y: number, mino: Mino? };
 type Row = Cell[];
 
 export class World {

@@ -1,6 +1,6 @@
 import { Tetris } from "../tetris/Tetris";
 import { World } from "../tetris/World";
-import { Move, Mino, ValidTetronimo } from "../tetris/Types";
+import { Move, Mino, ValidTetronimo, Cell } from "../tetris/Types";
 
 const canvas: any = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -29,18 +29,18 @@ export function render(game: Tetris) {
   }
 }
 
-function selectColour(mino: Mino): string {
-  if (!mino.occupied) {
+function selectColour(cell: Cell): string {
+  if (cell.mino == null) {
     return "white";
   }  
-  switch(mino.shape) {
-    case "I": return "powderBlue";
-    case "J": return "powderBlue";
-    case "L": return "powderBlue";
-    case "O": return "powderBlue";      
-    case "S": return "powderBlue";      
-    case "T": return "powderBlue";            
-    case "Z": return "powderBlue";
+  switch(cell.mino.shape) {
+    case "I": return "skyBlue";
+    case "J": return "blue";
+    case "L": return "orange";
+    case "O": return "yellow";      
+    case "S": return "chartreuse";      
+    case "T": return "darkViolet";            
+    case "Z": return "red";
     default: return "black";
   }
 }
