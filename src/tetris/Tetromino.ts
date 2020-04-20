@@ -1,13 +1,12 @@
+import { Location } from './Types';
 import { RotationState } from './RotationState';
 import { RotationOperation } from './RotationOperation';
 
+export type TetronimoLayout = { label: RotationState, layout: string[][] };
+export type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
 export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_";
-const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
-type TetronimoLayout = { label: RotationState, layout: string[][] };
-type Location = { x: number, y: number };
-type TetLocation = { x: number, y: number };
-type MinoLocation = { x: number, y: number, relativeX: number, relativeY: number };
+const valid: ValidTetronimo[] = ["I", "J", "L",  "S",  "T",  "Z", "O" ];
 
 export class Tetromino 
 {
@@ -18,7 +17,7 @@ export class Tetromino
 
     get height() { return this.layout.length }
 
-    public location: TetLocation;
+    public location: Location;
 
     private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
         this.allLayouts = allLayouts;
@@ -61,16 +60,16 @@ export class Tetromino
         const nextY = mino.y - 1;
         
         if (nextY <= 0) { 
-          return true; 
+          return false; 
         }
         
         const wouldCollideWithOccupied = occupiedLocations.filter(loc => loc.x == mino.x && loc.y == nextY).length;
         if (wouldCollideWithOccupied) {
-          return true;
+          return false;
         }
         
       }
-      return false;
+      return true;
     }
 
     public *Minos(): IterableIterator<MinoLocation> {
@@ -118,6 +117,8 @@ export class Tetromino
       return Tetromino.create(shuffled[0]);
     }
 }
+
+// Matrix rotations are for suckers.
 
 const layouts = {
     "_": [

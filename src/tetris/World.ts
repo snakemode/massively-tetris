@@ -1,8 +1,8 @@
+import { Location } from './Types';
 import { Tetromino } from "./Tetromino";
 
 type Cell = { x: number, y: number, occupied: boolean };
 type Row = Cell[];
-type Location = { x: number, y: number };
 
 export class World {
 
@@ -26,20 +26,19 @@ export class World {
       this.tetromino = Tetromino.random();
       this.tetromino.location = { x: 3, y: this.height + 2 };
     }
-    
-    // DO REAL COLLISION DETECTION HERE
-    
-    if (this.tetromino.wouldCollide(this.occupiedLocations)) {
-      
-      // Lock it in
-      for (const mino of this.tetromino.Minos()) {
-        this.occupiedLocations.push(mino);
-      }      
-      this.tetromino = null;
-    } else {
-      
+        
+    if (this.tetromino.canMove(this.occupiedLocations)) {      
       this.tetromino.location.y = this.tetromino.location.y - 1;
+    } else {
+      this.setMinosIntoWorld();
+      this.tetromino = null;
     }
+  }
+  
+  private setMinosIntoWorld(): void {
+    for (const mino of this.tetromino.Minos()) {
+      this.occupiedLocations.push(mino);
+    }   
   }
 
   public *Cells(): IterableIterator<Cell> {
