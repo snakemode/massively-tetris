@@ -62,13 +62,14 @@ export class World {
       for (let x = 0; x < this.width; x++) {
         let anyMinos: Mino[] = this.occupiedLocations.filter(l => l.x === x && l.y === y);
         let occupied: boolean = anyMinos.length > 0;
-        let mino = occupied ? occupied[0]: null;
-        
+        let origin = occupied ? anyMinos[0].shape : null;        
+  
         if (this.tetromino != null && this.tetromino.occupies({ x, y })) {
-          mino = this.tetromino.minoFor({ x, y });
+          occupied = true;
+          origin = this.tetromino.shape;
         }
         
-        row.push({ x, y, mino });      
+        row.push({ x, y, occupied, origin });      
       }
       
       yield row;

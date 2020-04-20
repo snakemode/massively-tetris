@@ -30,10 +30,10 @@ export function render(game: Tetris) {
 }
 
 function selectColour(cell: Cell): string {
-  if (cell.mino == null) {
+  if (!cell.occupied) {
     return "white";
   }  
-  switch(cell.mino.shape) {
+  switch(cell.origin) {
     case "I": return "skyBlue";
     case "J": return "blue";
     case "L": return "orange";
