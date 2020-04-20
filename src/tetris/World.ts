@@ -23,7 +23,7 @@ export class World {
 
   public tick(): void {
     if (!this.tetromino) {
-      this.tetromino = Tetromino.random();
+      this.tetromino = Tetromino.L();
       this.tetromino.location = { x: 3, y: 22 };
     }
     
