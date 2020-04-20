@@ -1,4 +1,4 @@
-import { Location, ValidTetronimo, Mino } from './Types';
+import { Location, ValidTetronimo, Mino, Move } from './Types';
 import { RotationState } from './RotationState';
 import { RotationOperation } from './RotationOperation';
 
@@ -55,15 +55,17 @@ export class Tetromino
       return false;
     }
 
-    public canMove(occupiedLocations: Location[] = []): boolean {
+    public canMove(move: Move, occupiedLocations: Location[] = []): boolean {
       for (const mino of this.Minos()) {
-        const nextY = mino.y - 1;
+        
+        const nextX = mino.x + move.deltaX;
+        const nextY = mino.y + move.deltaY;
         
         if (nextY <= 0) { 
           return false; 
         }
         
-        const wouldCollideWithOccupied = occupiedLocations.filter(loc => loc.x == mino.x && loc.y == nextY).length;
+        const wouldCollideWithOccupied = occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
         if (wouldCollideWithOccupied) {
           return false;
         }

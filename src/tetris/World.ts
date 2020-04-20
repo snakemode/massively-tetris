@@ -1,4 +1,4 @@
-import { Location, ValidTetronimo } from './Types';
+import { Location, ValidTetronimo, Move, Mino } from './Types';
 import { Tetromino } from "./Tetromino";
 
 type Cell = { x: number, y: number, occupied: boolean };
@@ -10,7 +10,7 @@ export class World {
   public width: number;
   public height: number;
 
-  public occupiedLocations: Location[];
+  public occupiedLocations: Mino[];
   public tetromino: Tetromino;
 
   constructor(playerId: string, width: number = 10, height: number = 22) {
@@ -27,15 +27,19 @@ export class World {
       this.tetromino.location = { x: 3, y: this.height + 2 };
     }
         
-    if (this.tetromino.canMove(this.occupiedLocations)) {      
-      this.tetromino.location.y = this.tetromino.location.y - 1;
-    } else {
-      this.setMinosIntoWorld();
-      this.tetromino = Tetromino.Empty();
-    }
+    this.move({ deltaX: 0, deltaY: -1 });
   }
   
-  private setMinosIntoWorld(): void {
+  public move(movement: Move) {    
+    if (this.tetromino.canMove(movement, this.occupiedLocations)) {      
+      this.tetromino.location.y = this.tetromino.location.y + movement.deltaY;
+    } else {
+      this.lockTetromino();
+      this.tetromino = Tetromino.Empty();
+    }    
+  }
+  
+  private lockTetromino(): void {
     for (const mino of this.tetromino.Minos()) {
       this.occupiedLocations.push(mino);
     }   
