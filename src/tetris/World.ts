@@ -61,10 +61,6 @@ export class World {
     }
   }
 
-  public rotate(direction: RotationOperation) {
-    this.rotationSystem.rotate(direction);
-  }
-
   public canMove(move: Move): MoveResult {
     for (const mino of this.tetromino.minos()) {
 
@@ -88,6 +84,10 @@ export class World {
     return { canMove: true, lock: false };
   }
   
+  public rotate(direction: RotationOperation) {
+    this.rotationSystem.rotate(direction);
+  }
+
   public lockTetromino(): void {
     for (const mino of this.tetromino.minos()) {
       this.occupiedLocations.push(mino);
