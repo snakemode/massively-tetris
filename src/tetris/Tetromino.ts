@@ -4,6 +4,8 @@ import { RotationOperation } from './RotationOperation';
 export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_";
 type TetronimoLayout = { label: RotationState, layout: string[][] };
 
+type TetLocation = { x: number, y: number };
+
 export class Tetromino {
 
     public orientation: RotationState;
@@ -11,7 +13,7 @@ export class Tetromino {
     public layout: string[][];
     public locked: boolean;
 
-    public location: { x: number, y: number };
+    public location: TetLocation;
 
     private constructor(allLayouts: TetronimoLayout[], defaultState: RotationState = RotationState.O) {
         this.allLayouts = allLayouts;
@@ -37,6 +39,22 @@ export class Tetromino {
         this.orientation = rotationMap[nextState];
 
         this.layout = this.layoutFor(this.orientation);
+    }
+
+    public occupies(testLoc: TetLocation): boolean {
+      for (let minoY in layout) {
+        for (let minoX in layout) {
+          
+          const locationInWorldX = this.location.x + minoX;
+          const locationInWorldY = this.location.y + minoY;
+          
+          if (locationInWorldX === testLoc.x && locationInWorldY === testLoc.y) {
+            return true;
+          }          
+        }
+      }
+      
+      return false;
     }
 
     private layoutFor(state: RotationState) {        

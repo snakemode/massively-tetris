@@ -19,11 +19,14 @@ export class World {
     this.width = width;
     this.height = height;
     this.occupiedLocations = [];
+    this.tetromino = null;
   }
 
   public tick(): void {
     if (!this.tetromino) {
-      
+      this.tetromino = Tetromino.I();
+      this.tetromino.location = { x: 5, y: 5 };
+      console.log("Added piece");
     }
   }
 
@@ -40,7 +43,14 @@ export class World {
       const row: Row = [];
       
       for (let x = 0; x < this.width; x++) {
-        const occupied: boolean = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
+        let occupied: boolean = this.occupiedLocations.filter(l => l.x === x && l.y === y).length > 0;
+        
+        if (this.tetromino != null) {
+          if (this.tetromino.occupies({ x, y })) {
+            occupied = true;
+          }
+        }
+        
         row.push({ x, y, occupied });      
       }
       
