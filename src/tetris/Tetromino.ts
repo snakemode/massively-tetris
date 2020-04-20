@@ -28,6 +28,10 @@ export class Tetromino
         this.location = { x: -1, y: -1 };
     }
 
+    public setOrientation(state: RotationState) {      
+        this.orientation = state;
+        this.layout = this.layoutFor(state);
+    }
 
     public rotate(direction: RotationOperation) {
         const rotationMap = [
@@ -42,9 +46,9 @@ export class Tetromino
         
         nextState = nextState >= rotationMap.length ? 0 : nextState;
         nextState = nextState < 0 ? rotationMap.length - 1 : nextState;
-        this.orientation = rotationMap[nextState];
-
-        this.layout = this.layoutFor(this.orientation);
+        
+        const nextOrientation = rotationMap[nextState];
+        this.setOrientation(nextOrientation);
     }
 
     public occupies(worldLocation: Location): boolean {      
