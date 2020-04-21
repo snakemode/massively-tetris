@@ -1,12 +1,11 @@
 import { World } from "./World";
-import { RotationState, RotationOperation } from "./Types";
-import { Tetromino } from './Tetromino';
+import { WorldFactory } from './WorldFactory';
 
 
 describe("World", () => {
 
     it("Can make a test world from state", () => {
-        const sut = World.fromState([
+        const sut = WorldFactory.fromState([
             "S   ",
             "IIII",
             "IIII"
@@ -23,7 +22,7 @@ describe("World", () => {
     describe("Tick", () => {
 
         it("clears completed rows", () => {
-            const sut = World.fromState([
+            const sut = WorldFactory.fromState([
                 "          ",
                 "IIIIIIIIII"
             ]);
@@ -40,7 +39,7 @@ describe("World", () => {
     describe("lineClear", () => {
 
         it("clears completed rows", () => {
-            const sut = World.fromState([
+            const sut = WorldFactory.fromState([
                 "          ",
                 "          ",
                 "          ",
@@ -61,7 +60,7 @@ describe("World", () => {
         });
 
         it("clears multiple rows", () => {
-            const sut = World.fromState([
+            const sut = WorldFactory.fromState([
                 "          ",
                 "          ",
                 "          ",
@@ -82,7 +81,7 @@ describe("World", () => {
         });
 
         it("contents fall downwards when clearing single row", () => {
-            const sut = World.fromState([
+            const sut = WorldFactory.fromState([
                 "S         ",
                 "IIIIIIIIII"
             ]);
@@ -97,7 +96,7 @@ describe("World", () => {
         });
 
         it("contents fall downwards when clearing multiple rows", () => {
-            const sut = World.fromState([
+            const sut = WorldFactory.fromState([
                 "S   ",
                 "IIII",
                 "IIII"

@@ -18,7 +18,7 @@ export class World {
   public gameOver: boolean = false;
   public score: number = 0;
 
-  constructor(playerId: string, width: number = 10, height: number = 22) {
+  public constructor(playerId: string, width: number = 10, height: number = 22) {
     this.rotationSystem = new SuperRotationSystem(this);
     this.playerId = playerId;
     this.width = width;
@@ -42,6 +42,11 @@ export class World {
   }
 
   public move(move: Move) {
+
+    if (move.rotation != RotationOperation.None) {      
+      this.rotationSystem.rotate(move.rotation);
+    }
+
     const moveCheck = this.canMove(move);
     
     if (moveCheck.canMove) {      
@@ -55,7 +60,7 @@ export class World {
     }
   }
 
-  public canMove(move: Move): MoveResult {
+  private canMove(move: Move): MoveResult {
     for (const mino of this.tetromino.minos()) {
 
       const nextX = mino.x + move.deltaX;
@@ -83,11 +88,7 @@ export class World {
     return { canMove: true, lock: false };
   }
   
-  public rotate(direction: RotationOperation) {
-    this.rotationSystem.rotate(direction);
-  }
-
-  public lockTetromino(): void {
+  private lockTetromino(): void {
     for (const mino of this.tetromino.minos()) {
       this.occupiedLocations.push(mino);
     }   
@@ -182,26 +183,6 @@ export class World {
       lines.push(line);
     }
     return lines;
-  }
-  
-  public static fromState(worldLayout: string[]): World {
-    worldLayout = worldLayout.reverse();
-    var width = worldLayout[0].length;
-    var height = worldLayout.length;
-
-    var world = new World("player1", width, height);
-
-    for (const [y, line] of worldLayout.entries()) {
-      const cells = line.split('');
-      
-      for (const [x, cell] of cells.entries()) {
-        if (cell != ' ') {
-          world.occupiedLocations.push({x, y, shape: cell as any as ValidTetronimo });
-        }
-      }
-    }
-
-    return world;
-  }
-    
+  }    
 }
+
