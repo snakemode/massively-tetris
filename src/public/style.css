@@ -10,13 +10,19 @@
 }
 
 .controls {
-  width: 600px;
+  width: 375px;
+  
 }
 
 .control {
   width: 33%;
   height: 5vh;
-  max-width: 130px;
+  max-width: 100px;
+}
+
+.wide-control {  
+  width: 49%;
+  height: 5vh;
 }
 
 
