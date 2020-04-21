@@ -22,7 +22,7 @@ export class Controls {
     }, false);
     
     window.addEventListener('touchend', (args) => {
-      this.processInput("w");
+      this.processInput({ key: "w" });
     }, false);
   }
 }
