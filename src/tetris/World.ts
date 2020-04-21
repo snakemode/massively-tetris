@@ -68,10 +68,15 @@ export class World {
       if (nextX < 0 || nextX >= this.width) {
         return { canMove: false, lock: false };
       }
+      
+      const wouldCollide = this.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
 
-      const wouldCollideWithOccupied = this.occupiedLocations.filter(loc => loc.x == nextX && loc.y == nextY).length;
-      if (wouldCollideWithOccupied) {
+      if (wouldCollide && move.deltaY != 0) {
         return { canMove: false, lock: true };
+      }
+
+      if (wouldCollide && move.deltaX != 0) {
+          return { canMove: false, lock: false };
       }
 
     }
