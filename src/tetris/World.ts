@@ -96,7 +96,7 @@ export class World {
     }
   }
 
-  public *rows(includeActiveTetromino: boolean = false): IterableIterator<Row> {    
+  public *rows(includeActiveTetromino: boolean = true): IterableIterator<Row> {    
     for (let yLoop = 0; yLoop < this.height; yLoop++) {
       const y: number = this.height - yLoop;
       
@@ -107,7 +107,7 @@ export class World {
         let occupied: boolean = anyMinos.length > 0;
         let origin = occupied ? anyMinos[0].shape : null;        
   
-        if (!onlyLocked) {
+        if (includeActiveTetromino) {
           if (this.tetromino != null && this.tetromino.occupies({ x, y })) {
             occupied = true;
             origin = this.tetromino.shape;
@@ -136,7 +136,7 @@ export class World {
   }
 
   private lineClear() {    
-    const allRows = [...this.rows(true)];
+    const allRows = [...this.rows(false)];
     allRows.reverse();
     
     const clearedRows: number[] = [];
