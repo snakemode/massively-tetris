@@ -5,6 +5,20 @@
   border: 1px solid black;
 }
 
+.board {
+  height: 65vh;
+}
+
+.controls {
+  width: 600px;
+}
+
+.control {
+  width: 33%;
+  height: 5vh;
+  max-width: 130px;
+}
+
 
 * {
   box-sizing: border-box;
@@ -16,14 +30,8 @@ body {
 }
 
 h1 {
-  font-style: italic;
   color: #373fff;
 }
-
-.bold {
-  font-weight: bold;
-}
-
 
 button {
   font-size: 16px;
