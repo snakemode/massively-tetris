@@ -146,6 +146,7 @@ export class World {
 
     completedRows = completedRows.reverse(); // Bottom first thanks!
 
+    const highestRow;
     for (let row of completedRows) {
       const y = row[0].y;
       //const rowAbove = y + 1;
