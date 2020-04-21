@@ -146,18 +146,20 @@ export class World {
 
     completedRows = completedRows.reverse(); // Bottom first thanks!
 
-    const highestRow;
     for (let row of completedRows) {
       const y = row[0].y;
-      //const rowAbove = y + 1;
+      const rowAbove = y + 1;
 
-      this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != y);
-      /*this.occupiedLocations = this.occupiedLocations.map(cell => {
-        if (cell.y == rowAbove) {
-          cell.y = y;
+      this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != y); // Wipe the one row
+      
+      // Shift all rows down
+      this.occupiedLocations = this.occupiedLocations.map(cell => {
+        if (cell.y > rowAbove) {
+          cell.y--;
         }
         return cell;
-      });*/
+      });
+      
     }
     
     switch(completedRows.length) {
