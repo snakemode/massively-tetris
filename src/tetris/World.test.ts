@@ -18,99 +18,80 @@ describe("World", () => {
         ]);
     });
 
-
     describe("Tick", () => {
 
-        it("clears completed rows", () => {
-            const sut = WorldFactory.fromState([
-                "          ",
-                "IIIIIIIIII"
-            ]);
+        describe("clears completed rows", () => {
 
-            sut.tick();
+            it("when there is a single complete row", () => {
+                const sut = WorldFactory.fromState([
+                    "          ",
+                    "IIIIIIIIII"
+                ]);
 
-            const snapshot = sut.toStringArray();
-            expect(snapshot[1]).toBe("          ");
+                sut.tick();
 
-        });
-    });
+                const snapshot = sut.toStringArray();
+                expect(snapshot[1]).toBe("          ");
 
+            });
 
-    describe("lineClear", () => {
+            it("when there are multiple complete rows", () => {
+                const sut = WorldFactory.fromState([
+                    "          ",
+                    "          ",
+                    "          ",
+                    "IIIIIIIIII",
+                    "IIIIIIIIII"
+                ]);
 
-        it("clears completed rows", () => {
-            const sut = WorldFactory.fromState([
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-                "IIIIIIIIII"
-            ]);
+                sut.tick();
 
-            sut.lineClear();
-
-            const snapshot = sut.toStringArray();
-            expect(snapshot).toStrictEqual([
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-            ]);
-        });
-
-        it("clears multiple rows", () => {
-            const sut = WorldFactory.fromState([
-                "          ",
-                "          ",
-                "          ",
-                "IIIIIIIIII",
-                "IIIIIIIIII"
-            ]);
-
-            sut.lineClear();
-
-            const snapshot = sut.toStringArray();
-            expect(snapshot).toStrictEqual([
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-            ]);
+                const snapshot = sut.toStringArray();
+                expect(snapshot).toStrictEqual([
+                    "          ",
+                    "          ",
+                    "          ",
+                    "          ",
+                    "          ",
+                ]);
+            });
         });
 
-        it("contents fall downwards when clearing single row", () => {
-            const sut = WorldFactory.fromState([
-                "S         ",
-                "IIIIIIIIII"
-            ]);
+        describe("applies gravity to rows after clearing them", () => {
 
-            sut.lineClear();
+            it("contents fall downwards when clearing single row", () => {
+                const sut = WorldFactory.fromState([
+                    "S         ",
+                    "IIIIIIIIII"
+                ]);
 
-            const snapshot = sut.toStringArray();
-            expect(snapshot).toStrictEqual([
-                "          ",
-                "S         ",
-            ]);
+                sut.tick();
+
+                const snapshot = sut.toStringArray();
+                expect(snapshot).toStrictEqual([
+                    "          ",
+                    "S         ",
+                ]);
+            });
+
+            it("contents fall downwards when clearing multiple rows", () => {
+                const sut = WorldFactory.fromState([
+                    "S   ",
+                    "IIII",
+                    "IIII"
+                ]);
+        
+                sut.tick();
+        
+                const snapshot = sut.toStringArray();
+                expect(snapshot).toEqual([
+                    "    ",
+                    "    ",
+                    "S   ",
+                ]);
+            });
         });
 
-        it("contents fall downwards when clearing multiple rows", () => {
-            const sut = WorldFactory.fromState([
-                "S   ",
-                "IIII",
-                "IIII"
-            ]);
-    
-            sut.lineClear();
-    
-            const snapshot = sut.toStringArray();
-            expect(snapshot).toEqual([
-                "    ",
-                "    ",
-                "S   ",
-            ]);
-        });
     });
 
 
