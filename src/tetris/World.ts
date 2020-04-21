@@ -1,4 +1,4 @@
-import { Location, ValidTetronimo, Move, Mino, Cell, RotationOperation, IRotationSystem } from './Types';
+import { Move, Mino, Cell, RotationOperation, IRotationSystem } from './Types';
 import { SuperRotationSystem } from './SuperRotationSystem';
 import { Tetromino } from "./Tetromino";
 
@@ -93,6 +93,49 @@ export class World {
       this.occupiedLocations.push(mino);
     }   
   }
+  
+  private spawnNewPiece() {
+    this.tetromino = Tetromino.random();
+    this.tetromino.location = { x: 3, y: this.height + 2 }; 
+  }
+
+  private checkForGameOver(){
+    const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
+      
+    if (!gameOverCheck.canMove) {
+      console.log("❌ Game over! " + this.score);
+      this.gameOver = true;
+    } 
+  }
+
+  private lineClear() {    
+    const allRows = [...this.rows(false)];
+        
+    const clearedRows: number[] = [];
+    for (var row of allRows) {
+      const rowY = row[0].y;
+      
+      if (row.every(cell => cell.occupied)) {
+        this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != rowY);
+        clearedRows.push(rowY);
+      }      
+    }
+     
+    for (const rowNumber of clearedRows) {  // Shift all rows down      
+      this.occupiedLocations = this.occupiedLocations.map(cell => {
+        cell.y = cell.y > rowNumber ? cell.y - 1: cell.y;
+        return cell;
+      });
+    }   
+    
+    switch (clearedRows.length) {
+      case 1: this.score += 40;
+      case 2: this.score += 100;
+      case 3: this.score += 300;
+      case 4: this.score += 1200;
+      default: this.score += 0;
+    }
+  }
 
   public *cells(): IterableIterator<Cell> {
     for (let row of this.rows()) {
@@ -124,54 +167,11 @@ export class World {
       
       yield row;
     }
-  }
+  }  
   
-  private spawnNewPiece() {
-    this.tetromino = Tetromino.random();
-    this.tetromino.location = { x: 3, y: this.height + 2 }; 
-  }
-
-  private checkForGameOver(){
-    const gameOverCheck = this.canMove({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
-      
-    if (!gameOverCheck.canMove) {
-      console.log("❌ Game over! " + this.score);
-      this.gameOver = true;
-    } 
-  }
-
-  public lineClear() {    
-    const allRows = [...this.rows(false)];
-        
-    const clearedRows: number[] = [];
-    for (var row of allRows) {
-      const rowY = row[0].y;
-      
-      if(row.every(cell => cell.occupied)) {
-        this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != rowY);
-        clearedRows.push(rowY);
-      }      
-    }
-     
-    for(const rowNumber of clearedRows) {  // Shift all rows down      
-      this.occupiedLocations = this.occupiedLocations.map(cell => {
-        cell.y = cell.y > rowNumber ? cell.y - 1: cell.y;
-        return cell;
-      });
-    }   
-    
-    switch(clearedRows.length) {
-      case 1: this.score += 40;
-      case 2: this.score += 100;
-      case 3: this.score += 300;
-      case 4: this.score += 1200;
-      default: this.score += 0;
-    }
-  }
-  
-  public toStringArray(): string[] {
+  public toStringArray(includeActiveTetromino: boolean = false): string[] {
     const lines: string[] = [];
-    for (const row of this.rows()) {
+    for (const row of this.rows(includeActiveTetromino)) {
       var line = "";
       for (const cell of row) {
         if(cell.occupied) {

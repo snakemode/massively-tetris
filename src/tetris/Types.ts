@@ -1,4 +1,6 @@
 export type ValidTetronimo = "I" | "J" | "L" | "S" | "T" | "Z" | "O" | "_" | "Empty";
+export const ValidTetronimos: ValidTetronimo[] = [ "I", "J", "L",  "S",  "T",  "Z", "O" ];
+
 export type Location = { x: number, y: number };
 
 export type Mino = { x: number, y: number, relativeX?: number, relativeY?: number, shape: ValidTetronimo };

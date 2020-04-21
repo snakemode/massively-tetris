@@ -7,6 +7,22 @@ describe("World", () => {
 
         describe("clears completed rows", () => {
 
+            it("Moves active tetromino down one row", () => {
+                const sut = WorldFactory.fromState([
+                    "   ss     ",
+                    "  ss      ",
+                    "          ",
+                ], { x: 2, y: 2}, "S");
+    
+                sut.tick();
+    
+                expect(sut.toStringArray(true)).toStrictEqual([                   
+                    "          ",
+                    "   SS     ",
+                    "  SS      ",
+                ]);
+            });      
+
             it("when there is a single complete row", () => {
                 const sut = WorldFactory.fromState([
                     "     ",
@@ -15,8 +31,7 @@ describe("World", () => {
 
                 sut.tick();
 
-                const snapshot = sut.toStringArray();
-                expect(snapshot).toStrictEqual([
+                expect(sut.toStringArray()).toStrictEqual([
                     "     ",
                     "     "
                 ]);
@@ -32,8 +47,7 @@ describe("World", () => {
 
                 sut.tick();
 
-                const snapshot = sut.toStringArray();
-                expect(snapshot).toStrictEqual([
+                expect(sut.toStringArray()).toStrictEqual([
                     "     ",
                     "     ",
                     "     "
@@ -51,8 +65,7 @@ describe("World", () => {
 
                 sut.tick();
 
-                const snapshot = sut.toStringArray();
-                expect(snapshot).toStrictEqual([
+                expect(sut.toStringArray()).toStrictEqual([
                     "    ",
                     "S   "
                 ]);
@@ -67,8 +80,7 @@ describe("World", () => {
         
                 sut.tick();
         
-                const snapshot = sut.toStringArray();
-                expect(snapshot).toEqual([
+                expect(sut.toStringArray()).toStrictEqual([
                     "    ",
                     "    ",
                     "S   ",
@@ -85,8 +97,7 @@ describe("World", () => {
         
                 sut.tick();
         
-                const snapshot = sut.toStringArray();
-                expect(snapshot).toEqual([
+                expect(sut.toStringArray()).toStrictEqual([
                     "    ",
                     "    ",
                     "S   ",
@@ -107,8 +118,7 @@ describe("World", () => {
 
             sut.move({ deltaX: 1, deltaY: 0, rotation: RotationOperation.None });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toStrictEqual([
+            expect(sut.toStringArray(true)).toStrictEqual([
                 "    SS    ",
                 "II SS     ",
             ]);
@@ -122,8 +132,7 @@ describe("World", () => {
 
             sut.move({ deltaX: -1, deltaY: 0, rotation: RotationOperation.None });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toStrictEqual([
+            expect(sut.toStringArray(true)).toStrictEqual([
                 "   SS     ",
                 "IISS      ",
             ]);
@@ -137,8 +146,7 @@ describe("World", () => {
 
             sut.move({ deltaX: -1, deltaY: 0, rotation: RotationOperation.None });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toStrictEqual([
+            expect(sut.toStringArray(true)).toStrictEqual([
                 " SS     ",
                 "SS      ",
             ]);
@@ -152,8 +160,7 @@ describe("World", () => {
 
             sut.move({ deltaX: 1, deltaY: 0, rotation: RotationOperation.None });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toStrictEqual([
+            expect(sut.toStringArray(true)).toStrictEqual([
                 "  SS",
                 " SS ",
             ]);
@@ -166,9 +173,8 @@ describe("World", () => {
             ], { x: 0, y: 1}, "S");
 
             sut.move({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
-
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toEqual([
+            
+            expect(sut.toStringArray(true)).toStrictEqual([
                 " SS",
                 "SS ",
             ]);
@@ -183,8 +189,7 @@ describe("World", () => {
 
             sut.move({ deltaX: 0, deltaY: -1, rotation: RotationOperation.None });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toEqual([
+            expect(sut.toStringArray(true)).toStrictEqual([
                 " SS",
                 "SS ",
                 "III",
@@ -200,8 +205,7 @@ describe("World", () => {
 
             sut.move({ deltaX: 0, deltaY: 0, rotation: RotationOperation.Right });
 
-            const snapshot = sut.toStringArray(true);
-            expect(snapshot).toEqual([ 
+            expect(sut.toStringArray(true)).toStrictEqual([
                 'S  ', 
                 'SS ', 
                 ' S ' 
