@@ -5,7 +5,7 @@ import { Tetromino } from './Tetromino';
 
 describe("World", () => {
 
-    /*it("Can make a test world from state", () => {
+    it("Can make a test world from state", () => {
         const sut = World.fromState([
             "S   ",
             "IIII",
@@ -17,34 +17,25 @@ describe("World", () => {
             "IIII",
             "IIII"
         ]);
-    });*/
+    });
 
-/*
+
     describe("Tick", () => {
 
         it("clears completed rows", () => {
             const sut = World.fromState([
                 "          ",
-                "          ",
-                "          ",
-                "          ",
-                "IIIII IIII"
+                "IIIIIIIIII"
             ]);
 
             sut.tick();
 
             const snapshot = sut.toStringArray();
-            expect(snapshot).toBe([
-                "          ",
-                "          ",
-                "          ",
-                "          ",
-                "IIIII IIII"
-            ]);
+            expect(snapshot[1]).toBe("          ");
 
         });
     });
-*/
+
 
     describe("lineClear", () => {
 
