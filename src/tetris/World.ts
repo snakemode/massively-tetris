@@ -137,7 +137,33 @@ export class World {
 
   private lineClear() {
     let completedRows: Row[] = [];
+    
+    const allRows = [...this.rows(true)];
+    allRows.reverse();
+    
+    const clearedRows: number[] = [];
+    for (var row of allRows) {
+      const rowY = row[0].y;
+      
+      if(row.every(cell => cell.occupied)) {
+        this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != rowY);
+        clearedRows.push(rowY);
+      }      
+    }
+     
+    console.log(clearedRows);
 
+    for(const rowNumber of clearedRows) {
+       // Shift all rows down
+      this.occupiedLocations = this.occupiedLocations.map(cell => {
+        if (cell.y > rowNumber) {
+          cell.y--;
+        }
+        return cell;
+      });
+    }
+    
+    /*
     for (let row of this.rows(true)) {
       if(row.every(cell => cell.occupied)) {
         completedRows.push(row);
@@ -160,7 +186,7 @@ export class World {
         return cell;
       });
       
-    }
+    }*/
     
     switch(completedRows.length) {
       case 1: this.score += 40;
