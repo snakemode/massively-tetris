@@ -20,6 +20,10 @@ export class Controls {
     window.addEventListener("keypress", (args) => {
       this.processInput(args);
     }, false);
+    
+    window.addEventListener('touchend', (args) => {
+      this.processInput("w");
+    }, false);
   }
 }
 
