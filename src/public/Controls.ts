@@ -21,9 +21,13 @@ export class Controls {
       this.processInput(args);
     }, false);
     
-    window.addEventListener('touchend', (args) => {
-      this.processInput({ key: "w" });
-    }, false);
+    const buttons = document.querySelectorAll('[data-controller-input]') as any;
+    for (const button of buttons) {
+      const keyCode = button.getAttribute('data-controller-input');
+      button.addEventListener("click", () => {
+        this.processInput({ key: keyCode });
+      });
+    }
   }
 }
 

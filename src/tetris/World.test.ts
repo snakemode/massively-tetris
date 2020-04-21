@@ -32,7 +32,7 @@ describe("World", () => {
                 sut.tick();
 
                 expect(sut.toStringArray()).toStrictEqual([
-                    "     ",D
+                    "     ",
                     "     "
                 ]);
 
