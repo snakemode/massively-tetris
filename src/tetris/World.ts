@@ -61,7 +61,7 @@ export class World {
       const nextX = mino.x + move.deltaX;
       const nextY = mino.y + move.deltaY;
 
-      if (nextY <= 0) { 
+      if (nextY < 0) { 
         return { canMove: false, lock: true }; 
       }
       
@@ -98,12 +98,11 @@ export class World {
 
   public *rows(includeActiveTetromino: boolean = true): IterableIterator<Row> {    
     for (let yLoop = 0; yLoop < this.height; yLoop++) {
-      const y: number = this.height - yLoop;
-      
+      const y: number = (this.height -1 ) - yLoop;    
       const row: Row = [];
       
       for (let x = 0; x < this.width; x++) {
-        let anyMinos: Mino[] = this.occupiedLocations.filter(l => l.x === x && l.y === y);
+        let anyMinos: Mino[] = this.occupiedLocations.filter(l => l.x === x && l.y === y);        
         let occupied: boolean = anyMinos.length > 0;
         let origin = occupied ? anyMinos[0].shape : null;        
   
@@ -114,8 +113,8 @@ export class World {
           }
         }
         
-        row.push({ x, y, occupied, origin });      
-      }
+        row.push({ x, y, occupied, origin }); 
+      }    
       
       yield row;
     }
@@ -135,10 +134,9 @@ export class World {
     } 
   }
 
-  private lineClear() {    
+  public lineClear() {    
     const allRows = [...this.rows(false)];
-    allRows.reverse();
-    
+        
     const clearedRows: number[] = [];
     for (var row of allRows) {
       const rowY = row[0].y;
@@ -163,6 +161,42 @@ export class World {
       case 4: this.score += 1200;
       default: this.score += 0;
     }
-  }  
+  }
+  
+  public toStringArray(): string[] {
+    const lines: string[] = [];
+    for (const row of this.rows()) {
+      var line = "";
+      for (const cell of row) {
+        if(cell.occupied) {
+          line += cell.origin;
+        } else {
+          line += " ";
+        }
+      }
+      lines.push(line);
+    }
+    return lines;
+  }
+  
+  public static fromState(worldLayout: string[]): World {
+    worldLayout = worldLayout.reverse();
+    var width = worldLayout[0].length;
+    var height = worldLayout.length;
+
+    var world = new World("player1", width, height);
+
+    for (const [y, line] of worldLayout.entries()) {
+      const cells = line.split('');
+      
+      for (const [x, cell] of cells.entries()) {
+        if (cell != ' ') {
+          world.occupiedLocations.push({x, y, shape: cell as any as ValidTetronimo });
+        }
+      }
+    }
+
+    return world;
+  }
     
 }
