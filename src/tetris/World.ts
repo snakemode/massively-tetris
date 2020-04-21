@@ -148,15 +148,15 @@ export class World {
 
     for (let row of completedRows) {
       const y = row[0].y;
-      const rowAbove = y + 1;
+      //const rowAbove = y + 1;
 
       this.occupiedLocations = this.occupiedLocations.filter(cell => cell.y != y);
-      this.occupiedLocations = this.occupiedLocations.map(cell => {
+      /*this.occupiedLocations = this.occupiedLocations.map(cell => {
         if (cell.y == rowAbove) {
           cell.y = y;
         }
         return cell;
-      });
+      });*/
     }
     
     switch(completedRows.length) {
